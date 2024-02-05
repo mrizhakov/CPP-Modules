@@ -6,15 +6,15 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/02/04 17:22:24 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/02/05 20:11:06 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
-SRC = Phonebook.cpp Contact.cpp main.cpp
+SRC = Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
-EXECUTABLE = Phonebook
+EXECUTABLE = Zombie
 
 all: ${EXECUTABLE}
 
