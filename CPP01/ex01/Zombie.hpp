@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/05 20:11:42 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:53:15 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ class Zombie {
     std::string _zombie_name;
 };
 
-Zombie  *newZombie(std::string name);
-void    randomChump(std::string name);
+Zombie  *zombieHorde(int N, std::string name);
 
 #endif // ZOMBIE_HPP

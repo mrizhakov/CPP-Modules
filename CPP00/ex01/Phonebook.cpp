@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/05 21:12:58 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:58:38 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void PressEnterToContinue(void) {
     std::string input_str;
     std::cout << "Press Enter to continue...";
     std::getline(std::cin, input_str);
+    std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     system("clear");
 }
