@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/06 19:34:30 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/06 19:10:47 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,10 @@
 int main(void)
 {
     
-    Zombie().announce();
-    Zombie().announce();
-
-    
-    Zombie(hallo1);
-    
-    hallo1.announce();
-    randomChump("bye");
+    Zombie();
+    Zombie(hallo);
+    randomChump("randomName");
     Zombie *totallyNewZombie = newZombie("totally new zombie");
-    totallyNewZombie->announce();
     delete totallyNewZombie;
     
     return(0);

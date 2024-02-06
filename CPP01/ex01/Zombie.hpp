@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/06 19:34:30 by mrizakov         ###   ########.fr       */
+/*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
+/*   Updated: 2024/02/05 20:11:42 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
+
 
 #include <iostream>
 #include <string>
 #include <iomanip>
 #include <cstdlib>
 #include <limits>
-#include "Zombie.hpp"
 
+class Zombie {
+    
+    public:
+    Zombie(void);
+    Zombie(std::string str);
+    ~Zombie(void);
+    void set_name(std::string name);
+    void announce(void);
+    
+    private:
+    std::string _zombie_name;
+};
 
+Zombie  *newZombie(std::string name);
+void    randomChump(std::string name);
 
-int main(void)
-{
-    
-    Zombie().announce();
-    Zombie().announce();
-
-    
-    Zombie(hallo1);
-    
-    hallo1.announce();
-    randomChump("bye");
-    Zombie *totallyNewZombie = newZombie("totally new zombie");
-    totallyNewZombie->announce();
-    delete totallyNewZombie;
-    
-    return(0);
-}
+#endif // ZOMBIE_HPP
