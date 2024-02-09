@@ -6,15 +6,15 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/02/06 19:14:17 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/02/09 20:09:29 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
-SRC = Zombie.cpp zombieHorde.cpp main.cpp
+SRC = HumanA.cpp HumanB.cpp Weapon.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
-EXECUTABLE = Zombie
+EXECUTABLE = Weapon
 
 all: ${EXECUTABLE}
 
