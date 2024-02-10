@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/09 19:58:28 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:07:28 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@
 class HumanA {
     
     public:
-        HumanA(void);
-        HumanA(std::string name, Weapon weapon);
+        HumanA(std::string name, Weapon &weapon);
         ~HumanA(void);
-        void set_name(std::string name);
+        void setName(std::string name);
         void attack(void) const;
     
     private:
         std::string _name;
-        Weapon      _weapon;
+        Weapon      &_weapon;
 };
 
 #endif // HUMANA_HPP

@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/10 14:59:01 by mrizakov         ###   ########.fr       */
+/*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
+/*   Updated: 2024/02/10 19:05:36 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "HumanA.hpp"
-#include "Weapon.hpp"
-
+#ifndef HARL_HPP
+# define HARL_HPP
 
 
-// HumanA::HumanA(void) {
-// }
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cstdlib>
+#include <limits>
 
-HumanA::HumanA(std::string name, Weapon &weapon):_weapon(weapon) {
-    this->_name = name;
-}
+class Harl {
+    
+    public:
+    Harl(void);
+    ~Harl(void);
+    void complain(std::string level);
 
-HumanA::~HumanA(void) {
-}
+    private:
+    void debug(void);
+    void info(void);
+    void warning(void);
+    void error(void);
+};
 
-void HumanA::setName(std::string name) {
-    this->_name = name;
-}
 
-void HumanA::attack(void) const {
-    std::cout << this->_name << " attacks with their " << this->_weapon.getType() << std::endl;
-}
+#endif // HARL_HPP

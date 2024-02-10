@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/09 20:18:25 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:25:48 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Weapon {
     Weapon(std::string type);
     ~Weapon(void);
     
-    std::string getType(void) const;
+    const std::string getType(void) const;
     void        setType(std::string str);
     
     private:
