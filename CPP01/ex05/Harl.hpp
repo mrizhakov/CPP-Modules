@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/10 19:05:36 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:39:28 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ class Harl {
     void info(void);
     void warning(void);
     void error(void);
+    struct _log
+    {
+        std::string level;
+        void (Harl::*function)(void);
+    };
+    struct _log log[4];
 };
 
 
