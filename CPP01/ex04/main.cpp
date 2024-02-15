@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/10 18:58:05 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:12:22 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int main(int argc, char *argv[])
 {
     std::string line;
-    std::size_t found;
+    size_t found;
     if (argc != 4)
     {
         std::cout <<  "Correct usage: ./replace <filename> <string to be replaced> <replacement string>" << std::endl;
@@ -55,14 +55,24 @@ int main(int argc, char *argv[])
 
     while(std::getline(inFile, line))
     {
-        found = line.find(argv[2]);
+        found = line.find(needle);
+        // std::cout << "LINE is " <<  line  << " NEEDLE IS  " << needle << " FOUND at " << found << std::endl;
+        // std::cout << "NPOS is" <<  std::string::npos << std::endl;
         
+
         while (found != std::string::npos)
         {
             line.erase(found, needle.size());
+            //std::cout << "\n!!!!!!!newNeedle is " <<  newNeedle  << " size is " << newNeedle.size() << std::endl;
+
             if (newNeedle.size() != 0)
-                needle.insert(found, newNeedle);
-            found = line.find(argv[2]);
+            {
+                std::cout << "INSERTING AT POSITION " <<  found << std::endl;
+                line.insert(found, newNeedle);
+            }
+            //std::cout << line << std::endl;
+
+            found = line.find(needle);
         }
         if (found == std::string::npos)
         {
