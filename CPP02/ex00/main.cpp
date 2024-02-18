@@ -6,28 +6,31 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/12 16:21:35 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:45:02 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
-#include <iomanip>
-#include <cstdlib>
 #include <limits>
-#include "Zombie.hpp"
+#include "Fixed.hpp"
 
 
 
 int main(void)
 {
-    Zombie* horde = zombieHorde(5, "chussi");
-    horde->announce();
-    horde[0].announce();
-    horde[1].announce();
-    horde[2].announce();
-    horde[3].announce();
-    horde[4].announce();
-    delete [] horde;
+    Fixed a;
+    Fixed b(a);
+    Fixed c;
+
+    c = b;
+
+    std::cout << a.getRawBits() << std::endl;
+    std::cout << b.getRawBits() << std::endl;
+    std::cout << c.getRawBits() << std::endl;
+
+    
+    
+    
     return(0);
 }
+

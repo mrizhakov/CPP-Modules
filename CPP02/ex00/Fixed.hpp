@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/12 16:21:35 by mrizakov         ###   ########.fr       */
+/*   Created: 2024/01/31 15:13:31 by mrizakov          #+#    #+#             */
+/*   Updated: 2024/02/17 19:10:44 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
+
 #include <iostream>
-#include <string>
-#include <iomanip>
-#include <cstdlib>
 #include <limits>
-#include "Zombie.hpp"
 
+class Fixed {
+    
+    public:
+    Fixed(void);
+    Fixed(const Fixed &fixed);
+    Fixed &operator=(const Fixed &fixed2);
+    ~Fixed(void);
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
+    
+    private:
+    int _rawBits;
+    static const int _n_fract_bits;
+};
 
-
-int main(void)
-{
-    Zombie* horde = zombieHorde(5, "chussi");
-    horde->announce();
-    horde[0].announce();
-    horde[1].announce();
-    horde[2].announce();
-    horde[3].announce();
-    horde[4].announce();
-    delete [] horde;
-    return(0);
-}
+#endif // FIXED_HPP

@@ -6,15 +6,15 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/02/10 15:10:05 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/02/16 17:29:25 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-FLAGS = -fffdall -fffderror -fffdextra -std=c++98
-SRC = main.cpp
+FLAGS = -Wall -Werror -Wextra -std=c++98
+SRC = Fixed.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
-EXECUTABLE = replace
+EXECUTABLE = fixed
 
 all: ${EXECUTABLE}
 

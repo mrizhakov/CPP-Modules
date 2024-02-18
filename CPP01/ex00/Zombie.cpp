@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/06 19:32:12 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:24:33 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 
 Zombie::Zombie(void) {
     this->_zombie_name = "anon Zombie";
-    std::cout << this->_zombie_name << " is alive..." << std::endl;
 }
 
 Zombie::Zombie(std::string str) {
     this->_zombie_name = str;
-    std::cout << this->_zombie_name << " is alive..." << std::endl;
 }
 
 Zombie::~Zombie(void) {
