@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/18 18:35:13 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:44:21 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 
 Fixed::Fixed(void) : _rawBits(0) {
-    //std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(int const n) {
@@ -27,8 +26,7 @@ Fixed::Fixed(int const n) {
             std::cout << "Out of range for current implementation of fixed point number, will overflow" << std::endl;
             std::cout << "try numbers between INT/MIN / 1 << 8 and INT/MAX / 1 << 8" << std::endl;
     }
-        //std::cout << "Int constructor called" << std::endl;
-        this->_rawBits = (n << Fixed::_n_fract_bits);
+    this->_rawBits = (n << Fixed::_n_fract_bits);
 }
 
 Fixed::Fixed(float const floatN) {
@@ -38,7 +36,6 @@ Fixed::Fixed(float const floatN) {
             std::cout << "Warning : out of range for current implementation of fixed point number, will overflow" << std::endl;
             std::cout << "try numbers between INT/MIN / 1 << 8 and INT/MAX / 1 << 8" << std::endl;
     }
-    //std::cout << "Float constructor called" << std::endl;
     this->_rawBits = roundf(floatN * (1 << Fixed::_n_fract_bits));
 }
 
@@ -54,12 +51,10 @@ int Fixed::toInt(void) const {
 
 
 Fixed::~Fixed(void) {
-    //std::cout << "Destructor called" << std::endl;
 }
 
 Fixed &Fixed::operator=(const Fixed &fixed2) {
     this->setRawBits(fixed2.getRawBits());
-    //std::cout << "Copy assignment operator called" << std::endl;
     return (*this);
 }
 
@@ -112,15 +107,11 @@ Fixed Fixed::operator-(const Fixed &fixed2) const {
 }
 
 Fixed Fixed::operator/(const Fixed &fixed2) const {
-    Fixed result;
-    result.setRawBits(this->_rawBits / fixed2.getRawBits());
-    return (result);
+    return (this->toFloat() / fixed2.toFloat());
 }
 
 Fixed Fixed::operator*(const Fixed &fixed2) const {
-    Fixed result;
-    result.setRawBits(this->_rawBits * fixed2.getRawBits());
-    return (result);
+    return (this->toFloat() * fixed2.toFloat());
 }
 
 // ++i post-increment
