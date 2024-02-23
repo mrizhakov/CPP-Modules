@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/23 14:23:01 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:03:57 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void ClapTrap::attack(const string& target) {
    if (this->_hp != 0 || this->_energy != 0)
    {
       this->_energy--;
-      cout << "ClapTrap " << this->_name << " attacked " << target << " and did " << damage << endl;
+      cout << this->_name << " attacked " << target << " and did " << damage << endl;
    }
    else
       cout << "Claptrap " << this->_name << " can't attack because it's energy or hp ar low" << endl;

@@ -6,13 +6,13 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/02/23 11:37:44 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/02/23 15:49:05 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
-SRC = ClapTrap.cpp ScavTrap.cpp main.cpp
+SRC = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 EXECUTABLE = trap
 

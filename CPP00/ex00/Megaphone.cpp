@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:37:25 by mrizhakov         #+#    #+#             */
-/*   Updated: 2024/01/30 23:14:34 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2024/02/23 17:10:19 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     std::string::iterator i;
     std::string output;
     std::string output_uppercased; 
-      
+    
     wc = 1;
     if (argc == 1)
     {
