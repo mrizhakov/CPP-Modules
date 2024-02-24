@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/23 14:16:47 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:03:34 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,38 +43,11 @@ ScavTrap::ScavTrap(const ScavTrap& other)
 
 ScavTrap&    ScavTrap::operator=(const ScavTrap& other)
 {
-   (void)other;
+   this->_name = other._name;
+   this->_hp = other._hp;
+   this->_energy = other._energy;
    cout << "Scavtrap " << this->_name << " is alive" << endl;
    return *this;
-}
-
-void ScavTrap::attack(const string& target) {
-   if (this->_hp != 0 || this->_energy != 0)
-   {
-      this->_energy--;
-      cout << this->_name << " attacked " << target << " and did " << this->_damage << endl;
-   }
-   else
-      cout << "Scavtrap " << this->_name << " can't attack because it's energy or hp ar low" << endl;
-}
-
-void ScavTrap::takeDamage(unsigned int amount) {
-   this->_damage -= amount;
-   cout << "Scavtrap " << this->_name << " took " << amount << " points of damage" << endl;
-
-}
-
-void ScavTrap::beRepaired(unsigned int amount) {
-   if (this->_hp != 0 || this->_energy != 0)
-   {
-      this->_energy--;
-      this->_hp += amount;
-      if (this->_hp > 10)
-         this->_hp = 10;
-      cout << "Scavtrap " << this->_name << " repaired itself"<< endl;
-   }
-   else
-      cout << "Scavtrap " << this->_name << " can't attack because it's energy or hp ar low" << endl;
 }
 
 void  ScavTrap::guardGate(void) {

@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/23 14:14:25 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:03:42 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ class ScavTrap : public ClapTrap
         ScavTrap(const ScavTrap& other);
         ScavTrap& operator=(const ScavTrap& other);
 
-        void    attack(const string& target);
-        void    takeDamage(unsigned int amount);
-        void    beRepaired(unsigned int amount);
         void    guardGate(void);
 
     private:

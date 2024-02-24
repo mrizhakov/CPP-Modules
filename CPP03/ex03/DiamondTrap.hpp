@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef    DIAMONDTRAP_HPP
-#define    DIAMONDTRAP_HPP
+#pragma once
+// #ifndef    DIAMONDTRAP_HPP
+// #define    DIAMONDTRAP_HPP
 
 #include <iostream>
 #include <string>
@@ -34,18 +35,17 @@ class DiamondTrap : public FragTrap, public ScavTrap
         DiamondTrap(const DiamondTrap& other);
         DiamondTrap& operator=(const DiamondTrap& other);
 
-        // void    attack(const string& target);
-        // void    takeDamage(unsigned int amount);
-        // void    beRepaired(unsigned int amount);
-        // void    highFivesGuys(void);
-        using   ScavTrap::attack;
+        using   ScavTrap::attack; //(const string& target);
+        using   ClapTrap::beRepaired; //(const string& target);
+        using   ClapTrap::takeDamage;
         void    whoAmI(void);
+        void    setName(string name);
 
     private:
         string          _name;
-        unsigned int    _hp;
-        unsigned int    _energy;
-        unsigned int    _damage;
+        using           FragTrap::_hp;
+        using           ScavTrap::_energy;
+        using           FragTrap::_damage;
 };
 
-#endif
+// #endif

@@ -19,21 +19,13 @@ using std::cout;
 using std::endl;
 using std::string;
 
-// DiamondTrap::DiamondTrap(void) : ClapTrap(name), _name("no name")  {
-//    this->_hp =  100;
-//    this->_energy =  100;
-//    this->_damage =  30;
-//    cout << "Diamondtrap " << this->_name << " is alive" << endl;
-// }
-
-DiamondTrap::DiamondTrap(string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name) {
+DiamondTrap::DiamondTrap(string name) : ClapTrap(name + "_clap_name"), FragTrap(name + "_FragTrap"), ScavTrap(name + "_ScavTrap") {
    this->_name =  name;
-   this->_hp =  100;
-   cout << "Diamondtrap " << this->FragTrap::_name << " is alive" << endl;
-
-   this->_energy =  100;
-   this->_damage =  30;
+   this->_hp = FragTrap::_hp;
+   this->_energy = ScavTrap::_energy;
+   this->_damage = FragTrap::_damage;
    cout << "Diamondtrap " << this->_name << " is alive" << endl;
+   cout << "Current stats are: HP: " << this->_hp << " Energy: " << this->_energy << endl;
 }
 
 DiamondTrap::~DiamondTrap(void) {
@@ -43,22 +35,21 @@ DiamondTrap::~DiamondTrap(void) {
 DiamondTrap::DiamondTrap(const DiamondTrap& other)
 {
    *this = other;
-   cout << "Diamondtrap " << this->_name << " is alive" << endl;
+   cout << "Diamondtrap " << this->_name << " is alive by copy" << endl;
 }
 
 DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& other)
 {
-   (void)other;
-   cout << "Diamondtrap " << this->_name << " is alive" << endl;
+   this->_name = other._name;
+   this->_hp = other._hp;
+   this->_energy = other._energy;
+   cout << "Diamondtrap " << this->_name << " is alive by copy assignment" << endl;
    return *this;
 }
 
 void    DiamondTrap::whoAmI(void) {
+   cout << "whoAmI output: " << endl;
    cout << "Diamondtrap's name is " << this->_name << endl;
    cout << "Diamondtrap ClapTrap name is  " << this->ClapTrap::_name << endl;
-
+   cout << "Current stats are: HP: " << this->_hp << " Energy: " << this->_energy << endl;
 }
-
-
-   
-   

@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/23 16:24:03 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:16:54 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ class FragTrap : virtual public ClapTrap
         FragTrap(const FragTrap& other);
         FragTrap& operator=(const FragTrap& other);
 
-        void    attack(const string& target);
-        void    takeDamage(unsigned int amount);
-        void    beRepaired(unsigned int amount);
+        // void    attack(const string& target);
+        // void    takeDamage(unsigned int amount);
+        // void    beRepaired(unsigned int amount);
         void    highFivesGuys(void);
 
     protected:
