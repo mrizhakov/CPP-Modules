@@ -19,7 +19,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-DiamondTrap::DiamondTrap(string name) : ClapTrap(name + "_clap_name"), FragTrap(name + "_FragTrap"), ScavTrap(name + "_ScavTrap") {
+DiamondTrap::DiamondTrap(string name) : ClapTrap(name), FragTrap(name), ScavTrap(name) {
    this->_name =  name;
    this->_hp = FragTrap::_hp;
    this->_energy = ScavTrap::_energy;
@@ -48,8 +48,6 @@ DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& other)
 }
 
 void    DiamondTrap::whoAmI(void) {
-   cout << "whoAmI output: " << endl;
    cout << "Diamondtrap's name is " << this->_name << endl;
    cout << "Diamondtrap ClapTrap name is  " << this->ClapTrap::_name << endl;
-   cout << "Current stats are: HP: " << this->_hp << " Energy: " << this->_energy << endl;
 }

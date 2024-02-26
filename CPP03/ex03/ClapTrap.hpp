@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/23 16:25:42 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:38:02 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ class ClapTrap
         void    beRepaired(unsigned int amount);
 
     protected:
-        string          _name;
-        unsigned int    _hp;
-        unsigned int    _energy;
-        unsigned int    _damage;
+        string  _name;
+        int     _hp;
+        int     _energy;
+        int     _damage;
 };
 
 #endif

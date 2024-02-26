@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/24 18:10:48 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:32:48 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ class FragTrap : public ClapTrap
 
     private:
         string          _name;
-        unsigned int    _hp;
-        unsigned int    _energy;
-        unsigned int    _damage;
+        // unsigned int    _hp;
+        // unsigned int    _energy;
+        // unsigned int    _damage;
 };
 
 #endif

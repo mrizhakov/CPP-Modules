@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/24 19:44:37 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:49:06 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void ClapTrap::attack(const string& target) {
 void ClapTrap::takeDamage(unsigned int amount) {
    this->_hp -= amount;
    if (this->_hp <= 0)
-         this->_hp = 0;
+      this->_hp = 0;
    cout << this->_name << " took " << amount << " points of damage" << endl;
 }
 
@@ -75,12 +75,13 @@ void ClapTrap::beRepaired(unsigned int amount) {
    if (this->_hp != 0 || this->_energy != 0)
    {
       this->_energy--;
+      if (this->_energy <= 0)
+         this->_energy = 0;
       this->_hp = this->_hp + amount;
       cout << this->_name << " repaired itself"<< endl;
    }
    else
       cout << this->_name << " can't attack because it's energy or hp ar low" << endl;
-   cout << "Current stats are: HP: " << this->_hp << " Energy: " << this->_energy << endl;
 }
 
    
