@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/26 18:49:57 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:17:10 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void ScavTrap::attack(const string& target) {
    }
    else
       cout << "ScavTrap " << this->_name << " can't attack because it's energy or hp ar low" << endl;
+   cout << "I'm no ClapTrap, i'm a proud ScavTrap!" << endl;
 }
 
 void  ScavTrap::guardGate(void) {

@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/26 18:49:06 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:48:59 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void ClapTrap::attack(const string& target) {
    }
    else
       cout << this->_name << " can't attack because it's energy or hp ar low" << endl;
+   cout << "WE ARE USING THE OG ClapTrap " << endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {

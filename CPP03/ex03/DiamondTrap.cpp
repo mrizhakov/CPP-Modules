@@ -19,7 +19,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-DiamondTrap::DiamondTrap(string name) : ClapTrap(name), FragTrap(name), ScavTrap(name) {
+DiamondTrap::DiamondTrap(string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name) {
    this->_name =  name;
    this->_hp = FragTrap::_hp;
    this->_energy = ScavTrap::_energy;

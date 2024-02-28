@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/24 18:03:34 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:13:37 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ ScavTrap&    ScavTrap::operator=(const ScavTrap& other)
    this->_energy = other._energy;
    cout << "Scavtrap " << this->_name << " is alive" << endl;
    return *this;
+}
+
+void ScavTrap::attack(const string& target) {
+   if (this->_hp != 0 || this->_energy != 0)
+   {
+      this->_energy--;
+      if (this->_energy <= 0)
+         this->_energy = 0;
+      cout << this->_name << " attacked " << target << " and did " << this->_damage << endl;
+   }
+   else
+      cout << this->_name << " can't attack because it's energy or hp ar low" << endl;
+   cout << "I'm no ClapTrap, i'm a proud ScavTrap!" << endl;
 }
 
 void  ScavTrap::guardGate(void) {

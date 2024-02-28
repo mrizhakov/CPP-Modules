@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/24 18:03:42 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/02/28 20:12:28 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ class ScavTrap : public ClapTrap
         ~ScavTrap(void);
         ScavTrap(const ScavTrap& other);
         ScavTrap& operator=(const ScavTrap& other);
-
+        
+        void    attack(const string& target);
         void    guardGate(void);
 
     private:
         string          _name;
-        unsigned int    _hp;
-        unsigned int    _energy;
-        unsigned int    _damage;
+
 };
 
 #endif
