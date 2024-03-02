@@ -41,9 +41,3 @@ void Dog::makeSound(void) const {
 std::string Dog::getType(void) const {
    return (this->_type);
 }
-
-
-void Dog::makeNoise(void) const {
-   std::cout << this->_type << " is making generic noises" << std::endl;
-}
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/03/02 17:51:12 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2024/03/02 18:36:34 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ class WrongCat: virtual public WrongAnimal
         WrongCat(const WrongCat& other);
         WrongCat& operator=(const WrongCat& other);
 
-        void    makeNoise(void) const;
-        void    makeSound(void) const;
+        void        makeSound(void) const;
         std::string getType(void) const;
 };
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongDong.cpp                                      :+:      :+:    :+:   */
+/*   WrongDog.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/03/02 17:46:53 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2024/03/02 18:35:15 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,3 @@ void WrongDog::makeSound(void) const {
 std::string WrongDog::getType(void) const {
    return (this->_type);
 }
-
-
-void WrongDog::makeNoise(void) const {
-   std::cout << this->_type << " is making generic noises" << std::endl;
-}
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/03/02 18:20:49 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2024/03/02 18:40:31 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,25 @@ int main(void)
     j->makeSound();
     meta->makeSound();
 
-    const WrongAnimal *wc = new WrongCat();
-    wc->makeSound();
-    const WrongAnimal *wd = new WrongDog();
-    wd->makeSound();
+    delete i;
+    delete j;
+    delete meta;
+
+    
+
+    const WrongAnimal* wmeta = new WrongAnimal();
+    const WrongAnimal* wj = new WrongDog();
+    const WrongAnimal* wi = new WrongCat();
+    std::cout << wj->getType() << " " << std::endl;
+    std::cout << wi->getType() << " " << std::endl;
+    wi->makeSound(); //will output the cat sound!
+    wj->makeSound();
+    wmeta->makeSound();
+    
+    delete wi;
+    delete wj;
+    delete wmeta;
+
     
     return(0);
 }

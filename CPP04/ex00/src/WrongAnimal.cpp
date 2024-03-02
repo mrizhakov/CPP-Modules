@@ -34,13 +34,10 @@ WrongAnimal&    WrongAnimal::operator=(const WrongAnimal& other)
 }
 
 void WrongAnimal::makeSound(void) const {
-   std::cout << this->_type << " object is doing a generic WrongAnimal sound" << std::endl;
+   std::cout << this->getType() << " object is doing a generic WrongAnimal sound" << std::endl;
 }
 
 std::string WrongAnimal::getType(void) const {
    return (this->_type);
 }
 
-void WrongAnimal::makeNoise(void) const {
-   std::cout << this->_type << " is making generic noises" << std::endl;
-}

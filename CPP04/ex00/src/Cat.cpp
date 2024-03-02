@@ -42,8 +42,3 @@ std::string Cat::getType(void) const {
    return (this->_type);
 }
 
-
-void Cat::makeNoise(void) const {
-   std::cout << this->_type << " is making generic noises" << std::endl;
-}
-

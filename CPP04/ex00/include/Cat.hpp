@@ -30,7 +30,6 @@ class Cat: virtual public Animal
         Cat(const Cat& other);
         Cat& operator=(const Cat& other);
 
-        void    makeNoise(void) const;
         void    makeSound(void) const;
         std::string getType(void) const;
 };

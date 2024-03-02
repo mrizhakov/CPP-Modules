@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/03/02 17:40:50 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2024/03/02 18:35:11 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,5 @@ void WrongCat::makeSound(void) const {
 
 std::string WrongCat::getType(void) const {
    return (this->_type);
-}
-
-
-void WrongCat::makeNoise(void) const {
-   std::cout << this->_type << " is making generic noises" << std::endl;
 }
 
