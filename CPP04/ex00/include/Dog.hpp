@@ -20,18 +20,13 @@
 
 class Dog: virtual public Animal
 {
-    protected:
-        std::string  _type;
-        
-
     public:
         Dog(void);
         ~Dog(void);
         Dog(const Dog& other);
         Dog& operator=(const Dog& other);
 
-        void    makeSound(void) const;
-        std::string getType(void) const;
+        void        makeSound(void) const;
 };
 
 #endif

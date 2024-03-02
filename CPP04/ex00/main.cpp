@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/03/02 18:40:31 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/03/02 21:43:15 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 
 int main(void)
 {
+    // const Animal* j = new Dog();
+    // const Animal* i = new Cat();
+    // delete j;//should not create a leak
+    // delete i;
     const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();

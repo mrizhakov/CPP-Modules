@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                       :+:      :+:    :+:   */
+/*   Dog.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,25 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef    ANIMAL_HPP
-#define    ANIMAL_HPP
+#ifndef    DOG_HPP
+#define    DOG_HPP
 
 #include <iostream>
 #include <string>
+#include "Animal.hpp"
 
-class Animal
+
+class Dog: virtual public Animal
 {
-    protected:
-        std::string  _type;
+    private:
+        Brain *_animalBrain;
         
     public:
-        Animal(void);
-        virtual ~Animal(void);
-        Animal(const Animal& other);
-        virtual Animal& operator=(const Animal& other);
+        Dog(void);
+        ~Dog(void);
+        Dog(const Dog& other);
+        Dog& operator=(const Dog& other);
 
-        virtual void        makeSound(void) const;
-        std::string         getType(void) const;
+        void        makeSound(void) const;
+        void        giveIdeas(std::string thought, unsigned int i);
+        std::string checkIdeas(unsigned int i);
 };
 
 #endif

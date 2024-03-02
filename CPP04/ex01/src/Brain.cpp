@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                       :+:      :+:    :+:   */
+/*   Brain.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,31 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "Brain.hpp"
 
-
-Dog::Dog(void) {
-   this->_type = "Dog";
-   std::cout << "Dog object is instantiated" << std::endl;
+Brain::Brain(void) {
+   std::cout << "Brain object is instantiated" << std::endl;
 }
 
-Dog::~Dog(void) {
-   std::cout << "Dog object is destroyed" << std::endl;
+Brain::~Brain(void) {
+   std::cout << "Brain object is destroyed" << std::endl;
 }
 
-Dog::Dog(const Dog& other)
+Brain::Brain(const Brain& other)
 {
-   *this = other;
-   std::cout << "Dog object is instantiated using the copy constructor" << std::endl;
+   int i = 0;
+   while (i != 99)
+   {
+      this->_ideas[i] = other._ideas[i];
+      i++;
+   }
+   //*this = other;
+   std::cout << "Brain object is instantiated using the copy constructor" << std::endl;
 }
 
-Dog&    Dog::operator=(const Dog& other)
+Brain&    Brain::operator=(Brain& other)
 {
-   this->_type = other._type;
-   std::cout << "Dog is instantiated using the assignment constructor" << std::endl;
+   int i = 0;
+   while (i != 99)
+   {
+      this->_ideas[i] = other._ideas[i];
+      i++;
+   }
+   // this->_ideas = other._ideas;
+   std::cout << "Brain object is instantiated using the assignment constructor" << std::endl;
    return *this;
-}
-
-void Dog::makeSound(void) const {
-   std::cout << this->_type << " says woof woof!" << std::endl;
 }

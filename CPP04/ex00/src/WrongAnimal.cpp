@@ -12,29 +12,30 @@
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(void) : _type("WrongAnimal") {
-   std::cout << this->_type << " object is instantiated" << std::endl;
+WrongAnimal::WrongAnimal(void) {
+   this->_type = "WrongAnimal";
+   std::cout << "WrongAnimal object is instantiated" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal(void) {
-   std::cout << this->_type << " object is destroyed" << std::endl;
+   std::cout << "WrongAnimal object is destroyed" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& other)
 {
    *this = other;
-   std::cout << this->_type << " object is instantiated using the copy constructor" << std::endl;
+   std::cout << "WrongAnimal object is instantiated using the copy constructor" << std::endl;
 }
 
 WrongAnimal&    WrongAnimal::operator=(const WrongAnimal& other)
 {
    this->_type = other._type;
-   std::cout << this->_type << " object is instantiated using the assignment constructor" << std::endl;
+   std::cout << "WrongAnimal object is instantiated using the assignment constructor" << std::endl;
    return *this;
 }
 
 void WrongAnimal::makeSound(void) const {
-   std::cout << this->getType() << " object is doing a generic WrongAnimal sound" << std::endl;
+   std::cout << "WrongAnimal sound" << std::endl;
 }
 
 std::string WrongAnimal::getType(void) const {
