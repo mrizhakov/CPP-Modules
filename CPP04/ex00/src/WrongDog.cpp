@@ -1,43 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                       :+:      :+:    :+:   */
+/*   WrongDong.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/28 17:48:59 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:46:53 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongDog.hpp"
 
 
-Cat::Cat(void) : _type("Cat") {
-   std::cout << this->_type << " object of type is instantiated" << std::endl;
+WrongDog::WrongDog(void) : _type("WrongDog") {
+   std::cout << this->_type << " object is instantiated" << std::endl;
 }
 
-Cat::~Cat(void) {
+WrongDog::~WrongDog(void) {
    std::cout << this->_type << " object is destroyed" << std::endl;
 }
 
-Cat::Cat(const Cat& other)
+WrongDog::WrongDog(const WrongDog& other)
 {
    *this = other;
    std::cout << this->_type << " object is instantiated using the copy constructor" << std::endl;
 }
 
-Cat&    Cat::operator=(const Cat& other)
+WrongDog&    WrongDog::operator=(const WrongDog& other)
 {
    this->_type = other._type;
    std::cout << this->_type << " is instantiated using the assignment constructor" << std::endl;
    return *this;
 }
 
-void Cat::makeSound(void) const {
-   std::cout << this->_type << " object is doing a generic animal sound" << std::endl;
+void WrongDog::makeSound(void) const {
+   std::cout << this->_type << " says woof woof!" << std::endl;
 }
 
-std::string Cat::getType(void) const {
+std::string WrongDog::getType(void) const {
    return (this->_type);
 }
+
+
+void WrongDog::makeNoise(void) const {
+   std::cout << this->_type << " is making generic noises" << std::endl;
+}
+

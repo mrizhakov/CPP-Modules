@@ -3,33 +3,41 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
+#    By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/03/01 21:13:04 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/03/02 18:21:44 by mrizhakov        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 CC = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
-SRC = Animal.cpp Cat.cpp main.cpp
-OBJ = $(SRC:.cpp=.o)
+SRC_DIR = src
+OBJ_DIR = obj
+INC_DIR = include
 EXECUTABLE = animal
+VPATH = $(SRC_DIR)
+SRC = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp WrongDog.cpp main.cpp
+OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
-all: ${EXECUTABLE}
+all: $(EXECUTABLE)
 
-${EXECUTABLE}: ${OBJ}
-	${CC} ${FLAGS} $^ -o $@
+$(EXECUTABLE): $(OBJ) | $(OBJ_DIR)
+	$(CC) $(FLAGS) $^ -o $@
 
-${OBJ}: ${SRC}
-	${CC} ${FLAGS} -c $^
+$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR)
+	$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-	rm -f ${OBJ} 
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -f ${EXECUTABLE}
+	rm -f $(EXECUTABLE)
 
 re: fclean all
 
-.PHONY: clean fclean
+.PHONY: clean

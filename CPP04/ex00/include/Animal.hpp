@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                       :+:      :+:    :+:   */
+/*   Animal.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,28 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef    CAT_HPP
-#define    CAT_HPP
+#ifndef    ANIMAL_HPP
+#define    ANIMAL_HPP
 
 #include <iostream>
 #include <string>
-#include "Animal.hpp"
 
-
-class Cat: virtual public Animal
+class Animal
 {
     protected:
         std::string  _type;
         
 
     public:
-        Cat(void);
-        ~Cat(void);
-        Cat(const Cat& other);
-        Cat& operator=(const Cat& other);
+        Animal(void);
+        virtual ~Animal(void);
+        Animal(const Animal& other);
+        Animal& operator=(const Animal& other);
 
-        virtual void    makeSound(void) const;
-        std::string getType(void) const;
+        virtual void makeSound(void) const;
+        virtual void makeNoise(void) const;
+
+        virtual std::string getType(void) const;
 };
 
 #endif

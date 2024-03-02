@@ -13,7 +13,7 @@
 #include "Animal.hpp"
 
 Animal::Animal(void) : _type("Animal") {
-   std::cout << this->_type << " object of type is instantiated" << std::endl;
+   std::cout << this->_type << " object is instantiated" << std::endl;
 }
 
 Animal::~Animal(void) {
@@ -39,4 +39,8 @@ void Animal::makeSound(void) const {
 
 std::string Animal::getType(void) const {
    return (this->_type);
+}
+
+void Animal::makeNoise(void) const {
+   std::cout << this->_type << " is making generic noises" << std::endl;
 }
