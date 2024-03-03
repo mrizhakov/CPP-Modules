@@ -24,8 +24,6 @@ class Brain
         Brain(const Brain& other);
         virtual Brain& operator=(Brain& other);
         
-        void giveIdeas(std::string though);
-
         std::string _ideas[100];
 };
 

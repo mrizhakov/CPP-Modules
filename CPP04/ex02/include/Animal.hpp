@@ -22,23 +22,16 @@ class Animal
     protected:
         std::string  _type;
 
-        Animal(void);
-        Animal(const Animal& other);
-        virtual Animal& operator=(const Animal& other);
         
     public:
         
         virtual ~Animal(void);
+        Animal(void);
+        Animal(const Animal& other);
+        virtual Animal& operator=(const Animal& other);
         
-        
-
-        virtual void        makeSound(void) const;
+        virtual void        makeSound(void) const = 0;
         std::string         getType(void) const;
-        // virtual void        giveIdeas(std::string thought, unsigned int i);
-        // virtual std::string checkIdeas(unsigned int i);
-        
-        //virtual void        giveIdeas(std::string thought, unsigned int i);
-
 };
 
 #endif

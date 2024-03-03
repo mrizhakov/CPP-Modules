@@ -30,11 +30,6 @@ class Animal
 
         virtual void        makeSound(void) const;
         std::string         getType(void) const;
-        // virtual void        giveIdeas(std::string thought, unsigned int i);
-        // virtual std::string checkIdeas(unsigned int i);
-        
-        //virtual void        giveIdeas(std::string thought, unsigned int i);
-
 };
 
 #endif

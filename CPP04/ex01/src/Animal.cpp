@@ -42,15 +42,3 @@ void Animal::makeSound(void) const {
 std::string Animal::getType(void) const {
    return (this->_type);
 }
-
-// void Animal::giveIdeas(std::string thought, unsigned int i) {
-//    (void)thought;
-//    (void)i;
-// }
-
-// std::string Animal::checkIdeas(unsigned int i) {
-//    (void)i;
-//    return NULL;
-// }
-
-

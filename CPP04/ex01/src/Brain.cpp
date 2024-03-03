@@ -28,7 +28,6 @@ Brain::Brain(const Brain& other)
       this->_ideas[i] = other._ideas[i];
       i++;
    }
-   //*this = other;
    std::cout << "Brain object is instantiated using the copy constructor" << std::endl;
 }
 
@@ -40,7 +39,6 @@ Brain&    Brain::operator=(Brain& other)
       this->_ideas[i] = other._ideas[i];
       i++;
    }
-   // this->_ideas = other._ideas;
    std::cout << "Brain object is instantiated using the assignment constructor" << std::endl;
    return *this;
 }
