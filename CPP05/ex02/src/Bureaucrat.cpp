@@ -78,7 +78,7 @@ void Bureaucrat::decrementGrade(void) {
    }
 }
 
-void Bureaucrat::signForm(Form &f) {
+void Bureaucrat::signForm(AForm &f) {
    try {
          f.beSigned(*this);
    } catch (std::exception &e) {
