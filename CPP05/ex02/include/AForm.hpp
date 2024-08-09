@@ -29,8 +29,8 @@ class AForm
         unsigned int            _grade_to_execute;
 
     public:
-        AForm(const std::string name, bool formSigned, unsigned int const grade_to_sign, unsigned int const grade_to_execute);
-        ~AForm(void);
+        AForm(const std::string target);
+        virtual ~AForm(void);
         AForm(const AForm& other);
         AForm& operator=(const AForm& other);
 
@@ -49,6 +49,7 @@ class AForm
         unsigned int            getGradeToSign(void) const;
         unsigned int            getGradeToExecute(void) const;
         bool                    getSigned(void) const;
+        std::string const       getTarget(void) const;
         virtual void            execute(Bureaucrat const &executor) const = 0; 
 };
 std::ostream& operator<<(std::ostream& os, const AForm& f);
