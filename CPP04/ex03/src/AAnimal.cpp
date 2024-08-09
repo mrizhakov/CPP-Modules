@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                       :+:      :+:    :+:   */
+/*   AAnimal.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,36 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 
-Animal::Animal(void) {
-   this->_type = "Animal";
-   std::cout << "Animal object is instantiated" << std::endl;
-}
+// AAnimal::AAnimal(void) {
+//    this->_type = "AAnimal";
+//    std::cout << "AAnimal object is instantiated" << std::endl;
+// }
 
-Animal::~Animal(void) {
-   std::cout << "Animal object is destroyed" << std::endl;
-}
+// AAnimal::~AAnimal(void) {
+//    std::cout << "AAnimal object is destroyed" << std::endl;
+// }
 
-Animal::Animal(const Animal& other)
+AMateria::AMateria(const AMateria& other)
 {
    *this = other;
-   std::cout << "Animal object is instantiated using the copy constructor" << std::endl;
+   std::cout << "AAnimal object is instantiated using the copy constructor" << std::endl;
 }
 
-Animal&    Animal::operator=(const Animal& other)
+AAnimal&    AAnimal::operator=(const AAnimal& other)
 {
    this->_type = other._type;
-   std::cout << "Animal object is instantiated using the assignment constructor" << std::endl;
+   std::cout << "AAnimal object is instantiated using the assignment constructor" << std::endl;
    return *this;
 }
 
-void Animal::makeSound(void) const {
+void AAnimal::makeSound(void) const {
    std::cout << this->_type << " object is doing a generic animal sound" << std::endl;
 }
 
-std::string Animal::getType(void) const {
+std::string AAnimal::getType(void) const {
    return (this->_type);
 }
 

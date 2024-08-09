@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                       :+:      :+:    :+:   */
+/*   AAnimal.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef    ANIMAL_HPP
-#define    ANIMAL_HPP
+#ifndef    AANIMAL_HPP
+#define    AANIMAL_HPP
 
 #include <iostream>
 #include <string>
 #include "Brain.hpp"
 
-class Animal
+class AAnimal
 {
     protected:
         std::string  _type;
@@ -25,10 +25,10 @@ class Animal
         
     public:
         
-        virtual ~Animal(void);
-        Animal(void);
-        Animal(const Animal& other);
-        virtual Animal& operator=(const Animal& other);
+        virtual ~AAnimal(void);
+        AAnimal(void);
+        AAnimal(const AAnimal& other);
+        virtual AAnimal& operator=(const AAnimal& other);
         
         virtual void        makeSound(void) const = 0;
         std::string         getType(void) const;

@@ -15,10 +15,10 @@
 
 #include <iostream>
 #include <string>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 
-class Cat: virtual public Animal
+class Cat: virtual public AAnimal
 {
     private:
         Brain *_animalBrain;

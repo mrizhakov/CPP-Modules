@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/08/09 22:13:40 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/03/03 14:31:28 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ FLAGS = -Wall -Werror -Wextra -std=c++98
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
-EXECUTABLE = Bureaucrat
+EXECUTABLE = animal
 VPATH = $(SRC_DIR)
-SRC = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp main.cpp
+SRC = AMatraia.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(EXECUTABLE)

@@ -6,12 +6,12 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/03/03 13:40:13 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:04:44 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 
@@ -24,7 +24,7 @@ int main(void)
     
     const int array_size = 2;
     int t = array_size;
-    Animal *zoo[t];
+    AAnimal *zoo[t];
     while(t != 0)
     {
         if (t % 2 == 0)
@@ -42,7 +42,7 @@ int main(void)
     }
 
     
-    const Animal* j = new Dog();
+    const AAnimal* j = new Dog();
     Cat *i = new Cat();
 
     i->giveIdeas("Mice!", 0);

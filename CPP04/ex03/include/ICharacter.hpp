@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                       :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/26 18:38:02 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:56:41 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef    DOG_HPP
-#define    DOG_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
-#include "AAnimal.hpp"
+#include "Brain.hpp"
+#include "Amateria.hpp"
 
 
-class Dog: virtual public AAnimal
+class ICharacter
 {
-    private:
-        Brain *_animalBrain;
-        
     public:
-        Dog(void);
-        ~Dog(void);
-        Dog(const Dog& other);
-        Dog& operator=(const Dog& other);
-
-        void        makeSound(void) const;
-        void        giveIdeas(std::string thought, unsigned int i);
-        std::string checkIdeas(unsigned int i);
+        virtual ~ICharacter() {}
+        virtual std::string const & getName() const = 0;
+        virtual void equip(AMateria* m) = 0;
+        virtual void unequip(int idx) = 0;
+        virtual void use(int idx, ICharacter& target) = 0;
 };
 
-#endif

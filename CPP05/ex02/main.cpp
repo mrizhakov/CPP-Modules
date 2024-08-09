@@ -6,41 +6,43 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/08/09 18:23:56 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/08/09 22:13:17 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 
 
 int main(void)
 {
-    Bureaucrat A = Bureaucrat("Paper whisperer", 149);
-    std::cout << A << std::endl;
+    ShrubberyCreationForm A = ShrubberyCreationForm("test");
+    // Bureaucrat A = Bureaucrat("Paper whisperer", 149);
+    // std::cout << A << std::endl;
 
-    Form Fa = Form("Leave", false, 150, 150);
-    std::cout << Fa << std::endl;
+    // Form Fa = Form("Leave", false, 150, 150);
+    // std::cout << Fa << std::endl;
 
 
-    A.signForm(Fa);
-    A.decrementGrade();
-    A.signForm(Fa);
-    A.incrementGrade();
-    A.signForm(Fa);
+    // A.signForm(Fa);
+    // A.decrementGrade();
+    // A.signForm(Fa);
+    // A.incrementGrade();
+    // A.signForm(Fa);
 
-    try {
-        Form Fa1 = Form("Bad form", false, 151, 15235);
-        std::cout << Fa1 << std::endl;
-    } catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-        // std::cout << Fa1 << std::endl;
-    }
+    // try {
+    //     Form Fa1 = Form("Bad form", false, 151, 15235);
+    //     std::cout << Fa1 << std::endl;
+    // } catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    //     // std::cout << Fa1 << std::endl;
+    // }
 
-    // Form Fa2 = Form("Really bad form", false, -5, 15235);
-    // std::cout << Fa2 << std::endl;
+    // // Form Fa2 = Form("Really bad form", false, -5, 15235);
+    // // std::cout << Fa2 << std::endl;
 
 
     return(0);

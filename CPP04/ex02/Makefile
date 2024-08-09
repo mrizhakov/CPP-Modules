@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/03/03 00:47:21 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/03/03 14:02:34 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = obj
 INC_DIR = include
 EXECUTABLE = animal
 VPATH = $(SRC_DIR)
-SRC = Animal.cpp Cat.cpp Dog.cpp Brain.cpp main.cpp
+SRC = AAnimal.cpp Cat.cpp Dog.cpp Brain.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(EXECUTABLE)

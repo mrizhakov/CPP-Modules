@@ -12,8 +12,8 @@
 
 #include "AForm.hpp"
 
-AForm::AForm(const std::string name, bool formSigned, unsigned int const grade_to_sign, unsigned int const grade_to_execute):
- _name(name), _formSigned(formSigned), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute) {
+AForm::AForm(const std::string name, unsigned int grade_to_sign, unsigned int grade_to_execute):
+ _name(name), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute) {
    if (_grade_to_sign < 1 || _grade_to_execute < 1)
       throw GradeTooHighException();
    if (_grade_to_sign > 150 || _grade_to_execute > 150)
@@ -75,6 +75,18 @@ void              AForm::beSigned(const Bureaucrat& b)
       throw GradeTooLowException();
    this->_formSigned = true;
    std::cout << "Form "<< _name << " signed by " << b.getName() << std::endl;
+}
+
+void              AForm::execute(Bureaucrat const &b) const
+{
+   if (b.getGrade() > this->getGradeToExecute())
+      throw AForm::GradeTooLowException();
+   if (!this->getSigned()) {
+      std::cout << "Form not signed, can't execute" << std::endl;
+      return;
+   }
+   this->action();
+   std::cout << b.getName() << " executed " << this->getName() << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& f) {
