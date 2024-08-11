@@ -20,17 +20,17 @@
 
 class Bureaucrat;
 
-class ShrubberyCreationForm : public AForm 
+class RobotomyRequestForm : public AForm 
 {
     private:
         std::string             _target;
 
     public:
-        ShrubberyCreationForm(void);
-        ShrubberyCreationForm(const std::string target);
-        ~ShrubberyCreationForm(void);
-        ShrubberyCreationForm(const ShrubberyCreationForm& other);
-        ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
+        RobotomyRequestForm(void);
+        RobotomyRequestForm(const std::string target);
+        ~RobotomyRequestForm(void);
+        RobotomyRequestForm(const RobotomyRequestForm& other);
+        RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
 
         void    action(void) const; 
 };

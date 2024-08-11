@@ -29,6 +29,7 @@ class Form
         unsigned int            _grade_to_execute;
 
     public:
+        Form(void);
         Form(const std::string name, bool formSigned, unsigned int const grade_to_sign, unsigned int const grade_to_execute);
         ~Form(void);
         Form(const Form& other);

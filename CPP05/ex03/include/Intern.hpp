@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                       :+:      :+:    :+:   */
+/*   Intern.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,27 +11,29 @@
 /* ************************************************************************** */
 
 #pragma once
-
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <stdexcept>
-#include <AForm.hpp>
+#include <iostream>
+// #include <AForm.hpp>
 
-class Bureaucrat;
+class AForm;
 
-class ShrubberyCreationForm : public AForm 
+class Intern
 {
-    private:
-        std::string             _target;
-
+    // private:
+    //     AForm* forms[3];
+        
     public:
-        ShrubberyCreationForm(void);
-        ShrubberyCreationForm(const std::string target);
-        ~ShrubberyCreationForm(void);
-        ShrubberyCreationForm(const ShrubberyCreationForm& other);
-        ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
-
-        void    action(void) const; 
+        Intern(void);
+        ~Intern(void);
+        Intern(const Intern& other);
+        Intern& operator=(const Intern& other);
+        
+        AForm* makeForm(std::string formName, std::string target);
+        class FormCantBeCreated : public std::exception
+        {
+            public:
+                virtual const char* what() const throw();
+        };
 };
-std::ostream& operator<<(std::ostream& os, const AForm& f);

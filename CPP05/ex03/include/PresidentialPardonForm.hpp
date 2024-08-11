@@ -20,17 +20,17 @@
 
 class Bureaucrat;
 
-class ShrubberyCreationForm : public AForm 
+class PresidentialPardonForm : public AForm 
 {
     private:
         std::string             _target;
 
     public:
-        ShrubberyCreationForm(void);
-        ShrubberyCreationForm(const std::string target);
-        ~ShrubberyCreationForm(void);
-        ShrubberyCreationForm(const ShrubberyCreationForm& other);
-        ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
+        PresidentialPardonForm(void);
+        PresidentialPardonForm(const std::string target);
+        ~PresidentialPardonForm(void);
+        PresidentialPardonForm(const PresidentialPardonForm& other);
+        PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 
         void    action(void) const; 
 };

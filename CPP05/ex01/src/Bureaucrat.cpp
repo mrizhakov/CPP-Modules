@@ -12,6 +12,10 @@
 
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat(void): _name("Noname Pencil Pusher"), _grade(150) {
+   std::cout << "Bureaucrat called "<< _name << " with grade " << _grade << " instantiated\n";
+}
+
 Bureaucrat::Bureaucrat(const std::string name, unsigned int grade): _name(name) {
    if (grade < 1)
       throw GradeTooHighException();

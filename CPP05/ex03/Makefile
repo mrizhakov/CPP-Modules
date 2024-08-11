@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2024/08/11 22:41:53 by mrizakov         ###   ########.fr        #
+#    Updated: 2024/08/11 23:03:08 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = obj
 INC_DIR = include
 EXECUTABLE = Bureaucrat
 VPATH = $(SRC_DIR)
-SRC = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp main.cpp
+SRC = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(EXECUTABLE)

@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/08/05 14:53:58 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/08/11 21:47:43 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int main(void)
 {
+    Bureaucrat Noname = Bureaucrat();
     Bureaucrat A = Bureaucrat("Paper whisperer", 3);
     std::cout << A << std::endl;
 
