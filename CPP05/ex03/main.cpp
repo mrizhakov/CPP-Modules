@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/08/12 01:04:12 by mrizakov         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:20:23 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int main(void)
     delete randomForm;
     delete randomForm3;
 
+    Intern someRandomIntern;
+    AForm* rrf;
+    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    (void)rrf;
+    rrf->beSigned(BigFish);
+    rrf->execute(BigFish);
+    delete rrf;
 
     return(0);
 }

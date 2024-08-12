@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
+
 
 Bureaucrat::Bureaucrat(void): _name("Noname Pencil Pusher"), _grade(150) {
    std::cout << "Bureaucrat called "<< _name << " with grade " << _grade << " instantiated\n";

@@ -20,18 +20,18 @@
 
 class Bureaucrat;
 
-class RobotomyRequestForm : public AForm 
+class RobotomyRequestForm : public AForm
 {
-    private:
-        std::string             _target;
+private:
+    std::string _target;
+    
+public:
+    RobotomyRequestForm(void);
+    RobotomyRequestForm(const std::string target);
+    ~RobotomyRequestForm(void);
+    RobotomyRequestForm(const RobotomyRequestForm &other);
+    RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
-    public:
-        RobotomyRequestForm(void);
-        RobotomyRequestForm(const std::string target);
-        ~RobotomyRequestForm(void);
-        RobotomyRequestForm(const RobotomyRequestForm& other);
-        RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
-
-        void    action(void) const; 
+    void action(void) const;
 };
-std::ostream& operator<<(std::ostream& os, const AForm& f);
+std::ostream &operator<<(std::ostream &os, const AForm &f);
