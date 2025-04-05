@@ -17,6 +17,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
+#include <cctype>
 
 
 
@@ -29,6 +30,18 @@ class ScalarConverter
         ScalarConverter& operator=(const ScalarConverter& other);
 
     public:
+        static bool isChar(const std::string &input);
+        static bool isInt(const std::string &input);
+        static bool isFloat(const std::string &input);
+        static bool isDouble(const std::string &input);
+
         static void    convert(const std::string &input);
+        enum TypeId {
+            INVALID,
+            CHAR,
+            INT,
+            FLOAT,
+            DOUBLE
+        };
 };
 

@@ -28,39 +28,60 @@ ScalarConverter&    ScalarConverter::operator=(const ScalarConverter& other)
    return *this;
 }
 
+bool ScalarConverter::isInt(const std::string &input) {
+   std::string::const_iterator it;
+   if (input.empty())
+   
+   for (it = input.begin(); it != input.end(); ++it)
+   {
+      if (!std::isdigit(*it))
+      {
+         std::cerr << "Not a digit" << std::endl;
+
+         return false;
+      }
+      std::cout << *it << std::endl;
+
+   }
+   return true;
+}
+
 void ScalarConverter::convert(const std::string &input)
 {
-   std::string convChar;
-   int         convInt;
-   float       convFloat;
-   double      convDouble;
-   (void)convDouble;
-   (void)convInt;
-   (void)convFloat;
+   // (void)input;
+   isInt(input);
 
-   if (input.empty())
-   {
-      std::cout << "Input is empty." << std::endl;
-      return ;
-   }
-   if (input.length() == 1 && std::isprint(input[0]) && !std::isdigit(input[0]))
-   {
-      convChar = input[0];  
-      std::cout << "Char: " << convChar << std::endl;
-      std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
-      std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
-      std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
-      return;
-   }
-   if (input.length()  1 && std::isprint(input[0]) && !std::isdigit(input[0]))
-   {
-      convChar = input[0];  
-      std::cout << "Char: " << convChar << std::endl;
-      std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
-      std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
-      std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
-      return;
-   }
+   // std::string convChar;
+   // int         convInt;
+   // float       convFloat;
+   // double      convDouble;
+   // (void)convDouble;
+   // (void)convInt;
+   // (void)convFloat;
+
+   // if (input.empty())
+   // {
+   //    std::cout << "Input is empty." << std::endl;
+   //    return ;
+   // }
+   // if (input.length() >= 1 && std::isprint(input[0]) && !std::isdigit(input[0]))
+   // {
+   //    convChar = input[0];  
+   //    std::cout << "Char: " << convChar << std::endl;
+   //    std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
+   //    std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
+   //    std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
+   //    return;
+   // }
+   // if (input.length() >= 1 && std::isprint(input[0]) && !std::isdigit(input[0]))
+   // {
+   //    convChar = input[0];  
+   //    std::cout << "Char: " << convChar << std::endl;
+   //    std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
+   //    std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
+   //    std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
+   //    return;
+   // }
 
 
 
