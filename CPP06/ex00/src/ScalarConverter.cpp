@@ -78,9 +78,9 @@ void ScalarConverter::convert(const std::string &input)
       (void)convDouble;
 
 
-      std::cout << "Conversion succesfull " << std::endl;
+      // std::cout << "Conversion succesfull " << std::endl;
       if (isprint(convChar)) {
-         std::cout << "Char: " << convChar << std::endl;
+         std::cout << "Char: \"" << convChar << "\"" <<std::endl;
       }
       else {
          std::cout << "Char: non-displayable" << std::endl; 
