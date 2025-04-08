@@ -6,13 +6,13 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2025/04/07 22:28:07 by mrizakov         ###   ########.fr        #
+#    Updated: 2025/04/08 23:21:39 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = c++
-FLAGS = -Wall -Werror -Wextra -std=c++98
+FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include

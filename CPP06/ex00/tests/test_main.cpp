@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/08 22:40:15 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/08 23:52:26 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,60 +125,97 @@ bool testDoubleConversion() {
 
 bool testNonDisplayableChar() {
     OutputCapture capture;
-    ScalarConverter::convert("1");  // ASCII 1 is non-displayable
+    ScalarConverter::convert("1");
     std::string output = capture.getOutput();
     
     ASSERT_CONTAINS(output, "Char: non-displayable", "Int: 1", "Float: 1.0f", "Double: 1");
     return true;
 }
 
-// bool testEmptyString() {
-//     OutputCapture capture;
-//     ScalarConverter::convert("");
-//     std::string output = capture.getOutput();
+bool testEmptyString() {
+    OutputCapture capture;
+    ScalarConverter::convert("\n");
+    std::string output = capture.getOutput();
     
-//     ASSERT_CONTAINS(output, "impossible");
-//     return true;
-// }
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: impossible", "Float: impossible", "Double: impossible");
+    return true;
+}
 
-// bool testInvalidInput() {
-//     OutputCapture capture;
-//     ScalarConverter::convert("hello");
-//     std::string output = capture.getOutput();
+bool testInvalidInput() {
+    OutputCapture capture;
+    ScalarConverter::convert("hello");
+    std::string output = capture.getOutput();
     
-//     ASSERT_CONTAINS(output, "impossible");
-//     return true;
-// }
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: impossible", "Float: impossible", "Double: impossible");
+    return true;
+}
 
-// bool testIntMaxValue() {
-//     OutputCapture capture;
+bool testIntMaxValue() {
+    OutputCapture capture;
     
-//     // Convert INT_MAX to string in C++98 style
-//     std::stringstream ss;
-//     ss << INT_MAX;
-//     std::string intMaxStr = ss.str();
-    
-//     ScalarConverter::convert(intMaxStr);
-//     std::string output = capture.getOutput();
-    
-//     ASSERT_CONTAINS(output, intMaxStr);
-//     return true;
-// }
+    std::stringstream ss;
+    ss << INT_MAX;
 
-// bool testIntMinValue() {
-//     OutputCapture capture;
+    std::string intMaxStr = ss.str();
     
-//     // Convert INT_MIN to string in C++98 style
-//     std::stringstream ss;
-//     ss << INT_MIN;
-//     std::string intMinStr = ss.str();
+    ScalarConverter::convert(intMaxStr);
+    std::string output = capture.getOutput();
     
-//     ScalarConverter::convert(intMinStr);
-//     std::string output = capture.getOutput();
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: 2147483647", "Float: 2.14748e+09.0f", "Double: 2.14748e+09.0");
+    return true;
+}
+
+bool testIntMinValue() {
+    OutputCapture capture;
     
-//     ASSERT_CONTAINS(output, intMinStr);
-//     return true;
-// }
+    std::stringstream ss;
+    ss << INT_MIN;
+    std::string intMinStr = ss.str();
+    
+    ScalarConverter::convert(intMinStr);
+    std::string output = capture.getOutput();
+    
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: -2147483648", "Float: -2.14748e+09.0f", "Double: -2.14748e+09.0");
+    return true;
+}
+
+bool testIntOverflow() {
+    OutputCapture capture;
+    
+    std::stringstream ss;
+    ss << -21474836490;
+    std::string intMinStr = ss.str();
+    
+    ScalarConverter::convert(intMinStr);
+    std::string output = capture.getOutput();
+    
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: impossible", "Float: -2.14748e+10f", "Double: -2.14748e+10");
+    return true;
+}
+
+bool testReallyBigNumber() {
+    OutputCapture capture;
+    
+    std::stringstream ss;
+    ss << DBL_MAX;
+    std::string intMinStr = ss.str();
+    
+    ScalarConverter::convert(intMinStr);
+    std::string output = capture.getOutput();
+    
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: impossible", "Float: impossible", "Double: 1.79769e+308");
+    return true;
+}
+
+bool nanf() {
+    OutputCapture capture;
+    
+    ScalarConverter::convert("nanf");
+    std::string output = capture.getOutput();
+    
+    ASSERT_CONTAINS(output, "Char: impossible", "Int: nan", "Float: nanf", "Double: nan");
+    return true;
+}
 
 // Main function to run all tests
 int main(int argc, char *argv[]) {
@@ -203,11 +240,14 @@ int main(int argc, char *argv[]) {
         {"Char Conversion", testCharConversion},
         {"Float Conversion", testFloatConversion},
         {"Double Conversion", testDoubleConversion},
-        {"Non-Displayable Char", testNonDisplayableChar}
-        // {"Empty String", testEmptyString},
-        // {"Invalid Input", testInvalidInput},
-        // {"INT_MAX Value", testIntMaxValue},
-        // {"INT_MIN Value", testIntMinValue}
+        {"Non-Displayable Char", testNonDisplayableChar},
+        {"Empty String", testEmptyString},
+        {"Invalid Input", testInvalidInput},
+        {"INT_MAX Value", testIntMaxValue},
+        {"INT_MIN Value", testIntMinValue},
+        {"Int Overflow", testIntOverflow},
+        {"Really Big Number", testReallyBigNumber},
+        {"nanf", nanf}
     };
     
     int testCount = sizeof(tests) / sizeof(tests[0]);
