@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2025/04/09 01:12:59 by mrizakov         ###   ########.fr        #
+#    Updated: 2025/04/09 01:25:22 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = obj
 INC_DIR = include
 EXECUTABLE = Base
 VPATH = $(SRC_DIR)
-SRC = Base.cpp main.cpp
+SRC = Base.cpp A.cpp B.cpp C.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 TEST_OBJS = $(filter-out $(OBJ_DIR)/main.o, $(OBJ))
 
