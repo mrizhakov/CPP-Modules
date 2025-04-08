@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/08 00:05:40 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/08 22:40:15 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,24 @@ public:
         return false; \
     }
 
-// #define ASSERT_CONTAINS(str, substr) \
-//     { \
-//         std::cerr << "\nActual output: \n" << str << "'\n"; \
-//         if ((str).find(substr) == std::string::npos) { \
-//             std::cerr << "  ASSERTION FAILED at line " << __LINE__ << std::endl; \
-//             return false; \
-//         } \
-//         std::cerr << "  ✅ Passed test\n"; \
-//     }
-
 #define ASSERT_CONTAINS(str, char_str, int_str, float_str, double_str) \
     { \
         std::cerr << "\nActual output: \n" << str << "\n"; \
         std::cerr << "\nExpected output: \n" << char_str << "\n" << int_str << "\n" << float_str << "\n" << double_str << "\n" << std::endl; \
-        if ((str).find(char_str) == std::string::npos \
-            && (str).find(int_str) == std::string::npos \
-            && (str).find(float_str) == std::string::npos \
-            && (str).find(double_str) == std::string::npos) { \
-            std::cerr << "❌ ASSERTION FAILED at line " << __LINE__ << std::endl; \
+        bool char_found = (str).find(char_str) != std::string::npos; \
+        bool int_found = (str).find(int_str) != std::string::npos; \
+        bool float_found = (str).find(float_str) != std::string::npos; \
+        bool double_found = (str).find(double_str) != std::string::npos; \
+        if (!(char_found && int_found && float_found && double_found)) { \
+            std::cerr << "❌ ASSERTION FAILED at line " << __LINE__ << ": Mismatched output." << std::endl; \
+            if (!char_found) std::cerr << "   Missing: " << char_str << std::endl; \
+            if (!int_found) std::cerr << "   Missing: " << int_str << std::endl; \
+            if (!float_found) std::cerr << "   Missing: " << float_str << std::endl; \
+            if (!double_found) std::cerr << "   Missing: " << double_str << std::endl; \
             return false; \
         } \
         std::cerr << "✅ Passed test\n"; \
     }
-
 // Test functions
 bool testIntegerConversion() {
     OutputCapture capture;
@@ -108,40 +102,35 @@ bool testCharConversion() {
     std::string output = capture.getOutput();
     
     ASSERT_CONTAINS(output, "Char: \"a\"", "Int: 97", "Float: 97", "Double: 97");
-    // ASSERT_CONTAINS(output, "Int: 97");
-    // ASSERT_CONTAINS(output, "Float: 97");
-    // ASSERT_CONTAINS(output, "Double: 97");
     return true;
 }
 
-// bool testFloatConversion() {
-//     OutputCapture capture;
-//     ScalarConverter::convert("42.5f");
-//     std::string output = capture.getOutput();
+bool testFloatConversion() {
+    OutputCapture capture;
+    ScalarConverter::convert("42.5f");
+    std::string output = capture.getOutput();
     
-//     ASSERT_CONTAINS(output, "Float: 42.5");
-//     ASSERT_CONTAINS(output, "Double: 42.5");
-//     return true;
-// }
+    ASSERT_CONTAINS(output, "Char: \"*\"", "Int: 42", "Float: 42.5f", "Double: 42.5");
+    return true;
+}
 
-// bool testDoubleConversion() {
-//     OutputCapture capture;
-//     ScalarConverter::convert("42.5");
-//     std::string output = capture.getOutput();
+bool testDoubleConversion() {
+    OutputCapture capture;
+    ScalarConverter::convert("42.1234");
+    std::string output = capture.getOutput();
     
-//     ASSERT_CONTAINS(output, "Float: 42.5");
-//     ASSERT_CONTAINS(output, "Double: 42.5");
-//     return true;
-// }
+    ASSERT_CONTAINS(output, "Char: \"*\"", "Int: 42", "Float: 42.1234f", "Double: 42.1234");
+    return true;
+}
 
-// bool testNonDisplayableChar() {
-//     OutputCapture capture;
-//     ScalarConverter::convert("1");  // ASCII 1 is non-displayable
-//     std::string output = capture.getOutput();
+bool testNonDisplayableChar() {
+    OutputCapture capture;
+    ScalarConverter::convert("1");  // ASCII 1 is non-displayable
+    std::string output = capture.getOutput();
     
-//     ASSERT_CONTAINS(output, "Char: non-displayable");
-//     return true;
-// }
+    ASSERT_CONTAINS(output, "Char: non-displayable", "Int: 1", "Float: 1.0f", "Double: 1");
+    return true;
+}
 
 // bool testEmptyString() {
 //     OutputCapture capture;
@@ -211,10 +200,10 @@ int main(int argc, char *argv[]) {
     
     TestCase tests[] = {
         {"Integer Conversion", testIntegerConversion},
-        {"Char Conversion", testCharConversion}
-        // {"Float Conversion", testFloatConversion},
-        // {"Double Conversion", testDoubleConversion},
-        // {"Non-Displayable Char", testNonDisplayableChar},
+        {"Char Conversion", testCharConversion},
+        {"Float Conversion", testFloatConversion},
+        {"Double Conversion", testDoubleConversion},
+        {"Non-Displayable Char", testNonDisplayableChar}
         // {"Empty String", testEmptyString},
         // {"Invalid Input", testInvalidInput},
         // {"INT_MAX Value", testIntMaxValue},

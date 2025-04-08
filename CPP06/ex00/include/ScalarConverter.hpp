@@ -16,6 +16,10 @@
 #include <string>
 #include <typeinfo>
 #include <cstdlib>
+#include <cfloat>
+#include <cerrno>
+#include <cctype>
+#include <climits>
 
 // #include <stdexcept>
 // #include <iostream>
@@ -37,14 +41,8 @@ class ScalarConverter
         static bool isInt(const std::string &input);
         static bool isFloat(const std::string &input);
         static bool isDouble(const std::string &input);
+        static void specialCases(const std::string &input);
 
         static void    convert(const std::string &input);
-        enum TypeId {
-            INVALID,
-            CHAR,
-            INT,
-            FLOAT,
-            DOUBLE
-        };
 };
 

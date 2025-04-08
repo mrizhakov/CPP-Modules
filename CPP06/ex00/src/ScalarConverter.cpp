@@ -27,139 +27,181 @@ ScalarConverter&    ScalarConverter::operator=(const ScalarConverter& other)
    (void)other;
    return *this;
 }
-
-bool ScalarConverter::isInt(const std::string &input) {
-   std::string::const_iterator it;
-   if (input.empty())
-   
-   for (it = input.begin(); it != input.end(); ++it)
+bool ScalarConverter::isDouble(const std::string &input) 
+{
+   errno = 0;
+   char *endptr = NULL;
+   strtod(input.c_str(), &endptr);
+   if (endptr == input.c_str() || *endptr != '\0' || errno == ERANGE)
    {
-      if (!std::isdigit(*it))
-      {
-         std::cerr << "Not a digit" << std::endl;
-
-         return false;
-      }
-      std::cout << *it << std::endl;
-
+      return false;
    }
    return true;
 }
 
-// bool ScalarConverter::isPrintableChar(const std::string &input)
-// {
-//    char c;
-//    int 
-//    if (input)
-// }
+bool ScalarConverter::isFloat(const std::string &input) 
+{
+   if (input.empty())
+   {
+      return false;
+   }
+   
+   char last_char = input[input.size() - 1];
+   if (last_char != 'f' && last_char != 'F')
+   {
+      return false;
+   }
+   
+   std::string numPart = input.substr(0, input.size() - 1);
+   
+   if (!isDouble(numPart))
+   {
+      return false;
+   }
+   
+   errno = 0;
+   char *endptr = NULL;
+   double result = strtod(numPart.c_str(), &endptr);
+
+   if (result > FLT_MAX || result < -FLT_MAX)
+   {
+      return false;
+   }
+   
+   return true;  
+}
+
+bool ScalarConverter::isInt(const std::string &input)
+{
+   errno = 0;
+   char *endptr = NULL;
+   strtol(input.c_str(), &endptr, 10);
+   if (endptr == input.c_str() || *endptr != '\0' || errno == ERANGE)
+   {
+      return false;
+   }
+   return true;
+}
+
+bool ScalarConverter::isChar(const std::string &input)
+{
+   if (!input.empty() && (input.size() == 1) && isprint(input[0]) && !isdigit(input[0]))
+   {
+      std::cerr << "error here" << std::endl;
+      return true;
+      //empty string, no conversion possible
+   }
+   return false;
+   
+}
+
+void ScalarConverter::specialCases(const std::string &input) {
+   std::cout << "Char: impossible" << std::endl;
+   std::cout << "Int: impossible" << std::endl;
+   if (input == "nan" || input == "nanf") {
+        std::cout << "Float: nanf" << std::endl;
+        std::cout << "Double: nan" << std::endl;
+        return; 
+   }
+
+   if (input == "+inf" || input == "+inff" || input == "inf" || input == "inff") {
+        std::cout << "Float: inff" << std::endl;  
+        std::cout << "Double: inf" << std::endl;
+        return;
+   }
+
+   if (input == "-inf" || input == "-inff") {
+        std::cout << "Float: -inff" << std::endl;
+        std::cout << "Double: -inf" << std::endl;
+        return;
+   }
+
+   if (input == "-nanf" || input == "-nan" || input == "+nanf" || input == "+nan") {
+        std::cout << "Float: impossible" << std::endl;
+        std::cout << "Double: impossible" << std::endl;
+        return;
+    }
+}
 
 void ScalarConverter::convert(const std::string &input)
 {
-   (void)input;
+   // Empty string case
    if (input.empty())
-   {
-      //empty string, no conversion possible
-   }   
-   char *endptr_strtod;
-   char *endptr_strtof;
-
-   double double_value = strtod(input.c_str(), &endptr_strtod);
-   float float_value = strtof(input.c_str(), &endptr_strtof);
-   (void)float_value;
-   (void)double_value;
-   if (*endptr_strtod == '\0' || *endptr_strtof == '\0')
-   {
-      char convChar = static_cast<char>(double_value);
-      int convInt = static_cast<int>(double_value);
-      float convFloat = static_cast<float>(double_value);
-      double convDouble = static_cast<double>(double_value);
-      (void)convInt;
-      (void)convFloat;
-      (void)convDouble;
-
-
-      // std::cout << "Conversion succesfull " << std::endl;
-      if (isprint(convChar)) {
-         std::cout << "Char: \"" << convChar << "\"" <<std::endl;
-      }
-      else {
-         std::cout << "Char: non-displayable" << std::endl; 
-      }
-      std::cout << "Int: " << static_cast<int>(double_value) << std::endl;
-      std::cout << "Float: " << static_cast<float>(double_value) <<  std::endl;
-      std::cout << "Double: " << static_cast<double>(double_value) <<  std::endl;
-   }
-   else
    {
       std::cout << "Char: impossible" << std::endl;
       std::cout << "Int: impossible" << std::endl;
       std::cout << "Float: impossible" << std::endl;
       std::cout << "Double: impossible" << std::endl;
+      return;
    }
-   
+   // Special cases
+   if (input == "nan" || input == "nanf" || input == "+inf" || input == "+inff" 
+      || input == "inf" || input == "inff" ||input == "-inf" || input == "-inff"
+      || input == "-nan" || input == "-nanf" || input == "+nan" || input == "+nanf") 
+   {
+      specialCases(input);
+      return;
+   }
+
+   // Single character case
+   if (isChar(input))
+   {
+      char c = input[0];
+      if (isprint(c)) {
+         std::cout << "Char: \"" << static_cast<char>(c) << "\"" <<std::endl;
+      }
+      else {
+         std::cout << "Char: non-displayable" << std::endl; 
+      }
+      std::cout << "Int: " << static_cast<int>(c) << std::endl;
+      std::cout << "Float: " << static_cast<float>(c) << std::endl;
+      std::cout << "Double: " << static_cast<double>(c) << std::endl;
+      return;
+   }
 
 
+   double value;
+   // All numbers will be converted to doubles or floats
 
+   if (isFloat(input)) {
+      // Numeric part, withoug the trailing f/F
+      std::string numPart = input.substr(0, input.size() - 1);
+      value = strtod(numPart.c_str(), NULL);
+   } else if (isDouble(input) || isInt(input)) {
+      value = strtod(input.c_str(), NULL);
+   } else {
+      std::cout << "Char: impossible" << std::endl;
+      std::cout << "Int: impossible" << std::endl;
+      std::cout << "Float: impossible" << std::endl;
+      std::cout << "Double: impossible" << std::endl;
+      return;
+   }
 
-   // if (*endptr != '\0')
-   // {
-   //    std::cout << "Char: " << convChar << std::endl;
-   //    std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
-   //    std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
-   //    std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
-   //    // could not perform conversion of string to double
-   // }
-   // if (input == "nan")
-   
-      
+   if (value >= 0 && value <= 127 && isprint(static_cast<int>(value))) {
+      std::cout << "Char: \"" << static_cast<char>(value) << "\"" <<std::endl;
+   } else {
+      std::cout << "Char: non-displayable" << std::endl; 
+   }
 
+   if (value <= INT_MAX && value >= INT_MIN) {
+      std::cout << "Int: " << static_cast<int>(value) << std::endl;
+   } else {
+      std::cout << "Int: impossible" << std::endl;
+   }
 
-   // isInt(input);
+   if (value <= FLT_MAX && value >= -FLT_MAX) { 
+      if (value == static_cast<int>(value)) {
+         std::cout << "Float: " << static_cast<float>(value) << ".0f" << std::endl;
+      } else {
+         std::cout << "Float: " << static_cast<float>(value) << "f" << std::endl;
+      }
+   } else {
+      std::cout << "Float: impossible" << std::endl;
+   }
 
-   // if (typeid())
-
-   // std::string convChar;
-   // int         convInt;
-   // float       convFloat;
-   // double      convDouble;
-   // (void)convDouble;
-   // (void)convInt;
-   // (void)convFloat;
-
-   // if (input.empty())
-   // {
-   //    std::cout << "Input is empty." << std::endl;
-   //    return ;
-   // }
-   // if (input.length() >= 1 && std::isprint(input[0]) && !std::isdigit(input[0]))
-   // {
-   //    convChar = input[0];  
-   //    std::cout << "Char: " << convChar << std::endl;
-   //    std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
-   //    std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
-   //    std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
-   //    return;
-   // }
-   // if (input.length() >= 1 && std::isprint(input[0]) && !std::isdigit(input[0]))
-   // {
-   //    convChar = input[0];  
-   //    std::cout << "Char: " << convChar << std::endl;
-   //    std::cout << "Int: " << static_cast<int>(convChar[0]) << std::endl;
-   //    std::cout << "Float: " << static_cast<float>(convChar[0]) << ".0f" << std::endl;
-   //    std::cout << "Double: " << static_cast<double>(convChar[0]) << ".0" << std::endl;
-   //    return;
-   // }
-
-
-
-
-
-
-
+   if (value == static_cast<int>(value)) {
+      std::cout << "Double: " << value << ".0" << std::endl;
+   } else {
+      std::cout << "Double: " << value << std::endl;
+   }
 }
-
-
-// std::ostream& operator<<(std::ostream& os, const ScalarConverter& b) {
-//    os << "Bureacrat: " << b.getName() << ", Grade: " << b.getGrade();
-//    return os;
-// }
