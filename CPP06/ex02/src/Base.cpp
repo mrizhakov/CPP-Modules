@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:07:18 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/09 01:45:46 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/09 17:57:08 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Base&    Base::operator=(const Base& other)
    return *this;
 }
 
-Base * Base::generate(void) 
+Base * generate(void) 
 {
    std::srand(time(NULL));
    int random_number = std::rand() % 3;
@@ -50,14 +50,27 @@ Base * Base::generate(void)
    }
 }
 
-void Base::identify(Base* p) 
+void identify(Base* p) 
 {
-   (void)p;
-
+   if (dynamic_cast<A*>(p)) {
+      std::cout << "Type A, using pointers to check" << std::endl;
+   } else if (dynamic_cast<B*>(p)) {
+      std::cout << "Type B, using pointers to check" << std::endl;
+   } else if (dynamic_cast<C*>(p)) {
+      std::cout << "Type C, using pointers to check" << std::endl;
+   } else
+   std::cout << "Some other class, using pointers to check" << std::endl;
 }
 
-void Base::identify(Base& p) 
+void identify(Base& p) 
 {
-   (void)p;
-
+   try {
+      A& a = dynamic_cast<A&>(p);
+      (void)a;
+      std::cout << "Type A, using references to check" << std::endl;
+   }
+   catch (const std::bad_cast& e) {
+      std::cout << "Not type A" << std::endl;
+   }
+   // (void)a;
 }
