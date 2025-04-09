@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:07:18 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/09 17:57:08 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/09 22:13:35 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,21 @@ void identify(Base* p)
 void identify(Base& p) 
 {
    try {
-      A& a = dynamic_cast<A&>(p);
-      (void)a;
+      (void)dynamic_cast<A&>(p);
       std::cout << "Type A, using references to check" << std::endl;
    }
-   catch (const std::bad_cast& e) {
-      std::cout << "Not type A" << std::endl;
+   catch (...) {}
+   try {
+      (void)dynamic_cast<B&>(p);
+      std::cout << "Type B, using references to check" << std::endl;
    }
-   // (void)a;
+   catch (...) {}
+   try {
+      (void)dynamic_cast<C&>(p);
+      std::cout << "Type C, using references to check" << std::endl;
+   }
+   catch (...) {}
 }
+
+// In order not to use anything from <typeinfo> using catch (...) (catches all)
+// Otherwise would have used catch (const std::bad_cast& e) with catch (...)
