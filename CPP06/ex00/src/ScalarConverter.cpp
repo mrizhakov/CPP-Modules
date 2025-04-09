@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.cpp                                       :+:      :+:    :+:   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 19:01:04 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/28 17:48:59 by mrizakov         ###   ########.fr       */
+/*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
+/*   Updated: 2025/04/09 01:08:37 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ScalarConverter.hpp"
 
@@ -97,7 +98,7 @@ void ScalarConverter::specialCases(const std::string &input) {
    std::cout << "Char: impossible" << std::endl;
    if (input == "nan" || input == "nanf") {
       std::cout << "Int: nan" << std::endl;
-      std::cout << "Float: nanf" << std::endl;
+      std::cout << "FlData new_data();oat: nanf" << std::endl;
       std::cout << "Double: nan" << std::endl;
       return; 
    }
@@ -157,7 +158,7 @@ void ScalarConverter::convert(const std::string &input)
       std::cout << "Int: " << static_cast<int>(c) << std::endl;
       std::cout << "Float: " << static_cast<float>(c) << std::endl;
       std::cout << "Double: " << static_cast<double>(c) << std::endl;
-      return;
+      return;Data new_data();
    }
 
 
@@ -165,7 +166,7 @@ void ScalarConverter::convert(const std::string &input)
    // All numbers will be converted to doubles or floats
 
    if (isFloat(input)) {
-      // Numeric part, withoug the trailing f/F
+      // Numeric part, without the trailing f/F
       std::string numPart = input.substr(0, input.size() - 1);
       value = strtod(numPart.c_str(), NULL);
    } else if (isDouble(input) || isInt(input)) {

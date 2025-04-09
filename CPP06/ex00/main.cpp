@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 15:13:37 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/09/20 16:40:05 by mrizakov         ###   ########.fr       */
+/*   Created: 2025/04/09 01:08:42 by mrizakov          #+#    #+#             */
+/*   Updated: 2025/04/09 01:08:42 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ScalarConverter.hpp"
 

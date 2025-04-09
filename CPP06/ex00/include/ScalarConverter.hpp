@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                       :+:      :+:    :+:   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 19:01:08 by mrizakov          #+#    #+#             */
-/*   Updated: 2024/02/26 18:38:02 by mrizakov         ###   ########.fr       */
+/*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
+/*   Updated: 2025/04/09 01:08:32 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #pragma once
 
@@ -20,13 +21,6 @@
 #include <cerrno>
 #include <cctype>
 #include <climits>
-
-// #include <stdexcept>
-// #include <iostream>
-// #include <cstdlib>
-// #include <cctype>
-
-
 
 class ScalarConverter
 {
@@ -43,6 +37,6 @@ class ScalarConverter
         static bool isDouble(const std::string &input);
         static void specialCases(const std::string &input);
 
-        static void    convert(const std::string &input);
+        static void convert(const std::string &input);
 };
 
