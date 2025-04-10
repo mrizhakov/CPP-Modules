@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/09 01:08:37 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/09 22:19:47 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void ScalarConverter::specialCases(const std::string &input) {
    std::cout << "Char: impossible" << std::endl;
    if (input == "nan" || input == "nanf") {
       std::cout << "Int: nan" << std::endl;
-      std::cout << "FlData new_data();oat: nanf" << std::endl;
+      std::cout << "Float: nanf" << std::endl;
       std::cout << "Double: nan" << std::endl;
       return; 
    }
@@ -158,7 +158,7 @@ void ScalarConverter::convert(const std::string &input)
       std::cout << "Int: " << static_cast<int>(c) << std::endl;
       std::cout << "Float: " << static_cast<float>(c) << std::endl;
       std::cout << "Double: " << static_cast<double>(c) << std::endl;
-      return;Data new_data();
+      return;
    }
 
 

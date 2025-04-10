@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2025/04/08 23:21:39 by mrizakov         ###   ########.fr        #
+#    Updated: 2025/04/09 22:21:46 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
 EXECUTABLE = ScalarConverter
+TEST_EXECUTABLE = test_converter
 VPATH = $(SRC_DIR)
 SRC = ScalarConverter.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
@@ -40,7 +41,7 @@ clean:
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(EXECUTABLE)
+	rm -f $(EXECUTABLE) $(TEST_EXECUTABLE)
 
 re: fclean all
 
