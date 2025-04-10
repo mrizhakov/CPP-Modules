@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/10 22:09:22 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:13:08 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 
 template <typename T>
-T& min(T &a, T &b) {
-    return (a >= b) ? b : a;
+void iter(T* array, int length, void (*function)(T&)) {
+    for (int i = 0; i < length; i++) {
+        function(array[i]);
+    }
 }
 

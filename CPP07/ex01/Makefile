@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2025/04/10 22:10:14 by mrizakov         ###   ########.fr        #
+#    Updated: 2025/04/10 22:45:38 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
-EXECUTABLE = Templates
+EXECUTABLE = Iter
 VPATH = $(SRC_DIR)
 SRC = Iter.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
