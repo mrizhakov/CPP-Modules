@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/11 00:15:28 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:19:07 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,50 @@ private:
     
 public:
     Array() {
-        T *data = new T();    
-        (void)data;
+        this->data = NULL;
+        this->n = 0;   
 
     };
 
     Array(unsigned int n) {
-        T *data = new T[n];
-        (void)data;
+        this->data = new T[n]();
+        this->n = n;
+        
     };
     
     ~Array() {
+        delete[] this->data;
         // delete data;
     };
     
     Array(const Array& other) {
-        if (data != other.data)
+        this->n = other.n;
+        this->data = new T[this->n];
+        for (unsigned int i = 0; i < this->n; i++)
         {
-            data = other.data;
+            this->data[i] = other.data[i];
         }
     };
     Array& operator=(const Array& other) {
-            if (this != &other) {
-            data = other.data;
+        if (this != &other) {
+            delete [] this->data;
+            this->n = other.n;
+            this->data = new T[this->n]();
+            for (unsigned int i = 0; i <this->n; i++) {
+                this->data[i] = other.data[i];
+            }
         }
-    return *this;
+        return *this;
     };
     
     T& operator[](unsigned int pos) {
-        if (pos >= n)
+        if (pos >= n || pos < 0)
             throw std::exception();
-        return data[pos];
+        return this->data[pos];
     }
 
     unsigned int size(void) const {
-        return n;
+        return this->n;
     };
     
 };

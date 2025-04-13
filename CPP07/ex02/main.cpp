@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:07:00 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/11 00:11:08 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:21:50 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <Array.hpp>
 #include <stdlib.h>
 #include <ctime>
+#include <stdio.h>
+
 
 #define MAX_VAL 750
 int main(int, char**)
@@ -26,6 +28,7 @@ int main(int, char**)
         const int value = rand();
         numbers[i] = value;
         mirror[i] = value;
+
     }
     //SCOPE
     {
@@ -37,7 +40,6 @@ int main(int, char**)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "didn't save the same value!!" << std::endl;
             return 1;
         }
     }
@@ -47,6 +49,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
+
         std::cerr << e.what() << '\n';
     }
     try
@@ -55,11 +58,14 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
+
         std::cerr << e.what() << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)
     {
+        
+
         numbers[i] = rand();
     }
     delete [] mirror;//
