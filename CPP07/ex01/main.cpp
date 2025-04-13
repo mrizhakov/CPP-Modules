@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:04:31 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/10 23:13:27 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/10 23:17:10 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 #include <iostream>
 #include <Iter.hpp>
 
-void add_one(char& c)
-{
-    c++;
-}
+// void add_one(char& c)
+// {
+//     c++;
+// }
 
-void add_one(int& c)
-{
-    c++;
-}
+// void add_one(int& c)
+// {
+//     c++;
+// }
 
 int main(int, char**)
 {
@@ -38,6 +38,9 @@ int main(int, char**)
     arr[1] = 3;
 
     iter(arr, 2, add_one);
+    // iter(arr, 2, add_one<int>);
+    // iter(arr, 2, add_one<char>);
+
     
     std::cout << arr[0] << arr[1] << std::endl;
     delete[] arr;
