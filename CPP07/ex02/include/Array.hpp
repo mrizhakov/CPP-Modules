@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/13 15:19:07 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:26:12 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ public:
     
     ~Array() {
         delete[] this->data;
-        // delete data;
     };
     
     Array(const Array& other) {
