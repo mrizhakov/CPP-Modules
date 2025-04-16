@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 12:04:31 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/14 19:21:24 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/16 22:27:12 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ int main(int, char**)
 
     }
     std::cout << "Longest span is " << span.longestSpan() << std::endl;
+    std::cout << "Shortest span is " << span.shortestSpan() << std::endl;
+
+    Span sp = Span(5);
+    sp.addNumber(6);
+    sp.addNumber(3);
+    sp.addNumber(17);
+    sp.addNumber(9);
+    sp.addNumber(11);
+    try {
+    std::cout << sp.shortestSpan() << std::endl;
+    } catch (...) {}
+    try { 
+    std::cout << sp.longestSpan() << std::endl;
+    } catch (...) {}
+    Span sp1 = Span(0);
+    sp1.addNumber(6);
 
     return 0;
 }
