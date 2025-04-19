@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/19 13:43:34 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:40:27 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void Span::addNumber(int number) {
 
 unsigned int Span::shortestSpan() const {
     if (this->current_stored <= 1)
-        throw std::runtime_error("Span has not enough elements to provide operation");
+        throw std::exception();
     unsigned int smallest_offset = UINT_MAX;
     unsigned int current_offset;
     (void)current_offset;
@@ -79,7 +79,7 @@ unsigned int Span::shortestSpan() const {
 
 unsigned int Span::longestSpan() const {
     if (this->current_stored <= 1)
-        throw std::runtime_error("Span has not enough elements to provide operation");
+        throw std::exception();
     std::vector<int>::const_iterator min_it = std::min_element(vec.begin(), vec.end());
     std::vector<int>::const_iterator max_it = std::max_element(vec.begin(), vec.end());
     return *max_it - *min_it;
@@ -87,7 +87,7 @@ unsigned int Span::longestSpan() const {
 
 void        Span::addMultipleRandom(int number) {
     if (this->current_stored + number > this->max_stored)
-        throw std::out_of_range("Cannot add more elements - Span is full");
+        throw std::exception();
     std::vector<int> vec;
     this->vec.reserve(this->max_stored);
     srand(time(NULL));
