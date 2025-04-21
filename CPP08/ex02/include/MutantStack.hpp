@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/21 20:48:54 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:58:02 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // #include <iostream>
 // #include <limits.h>
 
-class MutantStack {
+class MutantStack : std::stack {
     private:
         // unsigned int        max_stored;
         // unsigned int        current_stored;
