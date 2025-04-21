@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Templates.hpp                                      :+:      :+:    :+:   */
+/*   MutantStack.tpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/19 17:02:05 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:49:02 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include <string>
-
-
-template <typename T>
-T& min(T &a, T &b) {
-    return (a >= b) ? b : a;
-}
-
-template <typename T>
-T& max(T& a, T& b) {
-    return (a <= b) ? b : a;
-}
-
-template <typename T>
-void swap(T& a, T& b) {
-    T temp = a;
-    a = b;
-    b = temp;
-}
+template <typename Iterator>
+// void        Span::addRange(Iterator begin, Iterator end) {
+//     size_t distance = std::distance(begin, end);
+//     if (this->current_stored + distance > this->max_stored)
+//         throw std::exception();
+//     this->vec.insert(this->vec.end(), begin, end);
+//     this->current_stored += distance;
+// }

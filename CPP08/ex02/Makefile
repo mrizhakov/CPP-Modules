@@ -6,7 +6,7 @@
 #    By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizakov          #+#    #+#              #
-#    Updated: 2025/04/14 18:32:05 by mrizakov         ###   ########.fr        #
+#    Updated: 2025/04/21 20:50:41 by mrizakov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = obj
 INC_DIR = include
 EXECUTABLE = Span
 VPATH = $(SRC_DIR)
-SRC = Span.cpp main.cpp
+SRC = MutantStack.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(EXECUTABLE)
