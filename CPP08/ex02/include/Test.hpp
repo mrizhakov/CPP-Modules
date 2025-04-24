@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.tpp                                       :+:      :+:    :+:   */
+/*   Test.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 18:22:05 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/24 16:27:17 by mrizakov         ###   ########.fr       */
+/*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
+/*   Updated: 2025/04/10 21:35:13 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-template <typename C>
-const int& easyfind(const C& container, const int element)
-{
-    typename C::const_iterator it;
+#pragma once
+#include <string>
 
-    if (container.empty())
-        throw std::exception();
-    it = std::find(container.begin(), container.end(), element);
-    if (it != container.end()){
-        return *it;
-    }
-    else
-        throw std::exception();
-}
+class Test {
+public:
+    int value;
+    std::string id;
+    
+    Test();
+    Test(int v, std::string name);
+    Test(const Test& other);
+    Test& operator=(const Test& other);
+    ~Test();
+    
+    bool operator<=(const Test& other);
+    bool operator>=(const Test& other);
+};

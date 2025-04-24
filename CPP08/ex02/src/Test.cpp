@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   Test.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/24 16:27:37 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:37:03 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+
 #include <string>
-#include <exception>
-#include <algorithm>
-#include <vector>
-#include <iostream>
+#include "Test.hpp"
 
 
-template <typename C>
-const int& easyfind(const C& container, int element);
+Test::Test() : value(0), id("default") {};
 
-#include "easyfind.tpp"
+Test::Test(int v, std::string name) : value(v), id(name) {};
+
+Test::Test(const Test& other) : value(other.value), id(other.id){
+    (void)other;
+};
+
+Test& Test::operator=(const Test& other) {
+    if (this != &other) {
+        value = other.value;
+        id = other.id;
+    }
+    return *this;
+};
+
+Test::~Test() {};
+
+
+bool Test::operator<=(const Test& other) {
+    return value <= other.value;
+};
+
+bool Test::operator>=(const Test& other) {
+    return value >= other.value;
+};

@@ -6,16 +6,41 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/21 20:49:02 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:05:42 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-template <typename Iterator>
-// void        Span::addRange(Iterator begin, Iterator end) {
-//     size_t distance = std::distance(begin, end);
-//     if (this->current_stored + distance > this->max_stored)
-//         throw std::exception();
-//     this->vec.insert(this->vec.end(), begin, end);
-//     this->current_stored += distance;
-// }
+#include <stack>
+#include <deque>
+
+
+template <typename T, typename Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>  {
+    
+    public:
+    MutantStack() : std::stack<T, Container>() {}
+    MutantStack(const MutantStack &other) : std::stack<T, Container>(other) {}
+    MutantStack &operator=(const MutantStack &other) {
+        if (this != &other)
+            std::stack<T, Container>::operator=(other);
+        return *this;
+    }
+    ~MutantStack() {}
+
+    typedef typename Container::iterator iterator;
+    typedef typename Container::const_iterator const_iterator;
+    
+    iterator begin() {
+        return this->c.begin();
+    }
+    iterator end() {
+        return this->c.end();
+    }
+    const_iterator begin() const {
+        return this->c.begin();
+    }
+    const_iterator end() const {
+        return this->c.end();
+    }
+};
