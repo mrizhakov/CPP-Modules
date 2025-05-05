@@ -6,7 +6,7 @@
 /*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/29 21:35:37 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2025/05/05 17:19:27 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void BitcoinExchange::run(int argc, char *argv[])
    validateArgs(argc, argv);
    loadDatabase(DB_FILENAME);
    printDB();
-   processInput(argv[1]);
+   // processInput(argv[1]);
 }
 
 void BitcoinExchange::readDatabaseLine(std::string &line)
@@ -90,7 +90,10 @@ void BitcoinExchange::readInputLine(std::string &line)
       throw std::runtime_error("Values in the database not in the correct format");
 
    if (isValidDate(date) && isValidValue(value_double))
-      database[date] = value_double;
+   {
+      // get
+   }
+   //
    else
    {
       if (!isValidDate(date))

@@ -6,7 +6,7 @@
 /*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/29 20:26:10 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2025/05/05 17:19:28 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ public:
 
     void validateArgs(int argc, char *argv[]) const;
     void readDatabaseLine(std::string &line);
+    void readInputLine(std::string &line);
+
     void loadDatabase(std::string db_name);
     bool isValidDate(const std::string &date) const;
     bool isValidValue(const double &value) const;
     void printDB(void) const;
+    void processInput(std::string &filename);
 
     void run(int argc, char *argv[]);
 };
