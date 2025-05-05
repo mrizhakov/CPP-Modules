@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/05 17:19:27 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2025/05/05 20:17:54 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <fstream>
 #include <stdexcept>
+#include <cstdlib>
+
 
 BitcoinExchange::BitcoinExchange(void) {}
 
@@ -34,8 +36,8 @@ void BitcoinExchange::run(int argc, char *argv[])
 {
    validateArgs(argc, argv);
    loadDatabase(DB_FILENAME);
-   printDB();
-   // processInput(argv[1]);
+   // printDB();
+   processInput(argv[1]);
 }
 
 void BitcoinExchange::readDatabaseLine(std::string &line)
@@ -78,11 +80,14 @@ void BitcoinExchange::readInputLine(std::string &line)
    char **endptr = NULL;
    int value_double;
 
-   size_t delimiter = line.find(',');
+   size_t delimiter = line.find('|');
    if (delimiter != std::string::npos)
    {
       date = line.substr(0, delimiter);
       value = line.substr(delimiter + 1);
+   }
+   else {
+      std::cerr << "Error: bad input => " << line << std::endl;
    }
 
    value_double = strtod(value.c_str(), endptr);
@@ -91,19 +96,20 @@ void BitcoinExchange::readInputLine(std::string &line)
 
    if (isValidDate(date) && isValidValue(value_double))
    {
-      // get
+      std::cout << date << " => " << value_double << " = " << "ADD CONVERSION HERE" << std::endl;
+      
    }
    //
    else
    {
-      if (!isValidDate(date))
-         std::cerr << "Date is wrong: " << date << std::endl;
+      // if (!isValidDate(date))
+      //    std::cerr << "Error: bad input => " << date << std::endl;
 
-      if (!isValidValue(value_double))
-         std::cerr << "Value is wrong: " << value << std::endl;
+      // if (!isValidValue(value_double))
+      //    std::cerr << "Value is wrong: " << value << std::endl;
 
-      std::cerr << "Error in this line in database: " << line << std::endl;
-      throw std::runtime_error("Date or value in the database are not valid");
+      // std::cerr << "Error in this line in database: " << line << std::endl;
+      // throw std::runtime_error("Date or value in the database are not valid");
    }
 }
 
@@ -122,7 +128,7 @@ void BitcoinExchange::validateArgs(int argc, char *argv[]) const
 
 void BitcoinExchange::loadDatabase(std::string db_name)
 {
-   std::ifstream file(db_name);
+   std::ifstream file(db_name.c_str());
    if (!file.good())
       throw std::runtime_error("Error opening database file");
    std::string line;
@@ -138,7 +144,7 @@ void BitcoinExchange::loadDatabase(std::string db_name)
    }
 }
 
-void BitcoinExchange::processInput(std::string &filename)
+void BitcoinExchange::processInput(char *filename)
 {
    std::ifstream file(filename);
    if (!file.good())
@@ -194,10 +200,18 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
 
 bool BitcoinExchange::isValidValue(const double &value_double) const
 {
-   if (value_double >= 0 || value_double < 21000000)
-      return true;
-   else
+   if (value_double < 0)
+   {
+      std::cerr << "Error: not a positive number" << std::endl;
       return false;
+   }
+   else if (value_double > 1000)
+   {
+      std::cerr << "Error: too large a number" << std::endl;
+      return false;
+   }
+   else
+      return true;
 }
 
 void BitcoinExchange::printDB(void) const
