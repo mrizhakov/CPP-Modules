@@ -3,34 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/25 20:32:49 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:26:10 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #pragma once
 
 #include <iostream>
+#include <map>
 
+#define DB_FILENAME "data.csv"
+#define DB_HEADER "date,exchange_rate"
 
-class ScalarConverter
+class BitcoinExchange
 {
-    private:        
-        ScalarConverter(void);
-        ~ScalarConverter(void);
-        ScalarConverter(const ScalarConverter& other);
-        ScalarConverter& operator=(const ScalarConverter& other);
+private:
+    std::map<std::string, double> database;
 
-    public:
-        static bool isChar(const std::string &input);
-        static bool isInt(const std::string &input);
-        static bool isFloat(const std::string &input);
-        static bool isDouble(const std::string &input);
-        static void specialCases(const std::string &input);
+public:
+    BitcoinExchange(void);
+    ~BitcoinExchange(void);
+    BitcoinExchange(const BitcoinExchange &other);
+    BitcoinExchange &operator=(const BitcoinExchange &other);
 
-        static void convert(const std::string &input);
+    void validateArgs(int argc, char *argv[]) const;
+    void readDatabaseLine(std::string &line);
+    void loadDatabase(std::string db_name);
+    bool isValidDate(const std::string &date) const;
+    bool isValidValue(const double &value) const;
+    void printDB(void) const;
+
+    void run(int argc, char *argv[]);
 };
-

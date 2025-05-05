@@ -3,209 +3,205 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/25 20:32:48 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/04/29 21:35:37 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "BitcoinExchange.hpp"
+#include <fstream>
+#include <stdexcept>
 
-ScalarConverter::ScalarConverter(void) {}
+BitcoinExchange::BitcoinExchange(void) {}
 
-ScalarConverter::~ScalarConverter(void) {}
+BitcoinExchange::~BitcoinExchange(void) {}
 
-ScalarConverter::ScalarConverter(const ScalarConverter& other)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
 {
    (void)other;
    *this = other;
 }
 
-ScalarConverter&    ScalarConverter::operator=(const ScalarConverter& other)
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
    (void)other;
    return *this;
 }
-bool ScalarConverter::isDouble(const std::string &input) 
+
+void BitcoinExchange::run(int argc, char *argv[])
 {
-   errno = 0;
-   char *endptr = NULL;
-   strtod(input.c_str(), &endptr);
-   if (endptr == input.c_str() || *endptr != '\0' || errno == ERANGE)
+   validateArgs(argc, argv);
+   loadDatabase(DB_FILENAME);
+   printDB();
+   processInput(argv[1]);
+}
+
+void BitcoinExchange::readDatabaseLine(std::string &line)
+{
+   std::string date;
+   std::string value;
+   char **endptr = NULL;
+   int value_double;
+
+   size_t delimiter = line.find(',');
+   if (delimiter != std::string::npos)
    {
-      return false;
+      date = line.substr(0, delimiter);
+      value = line.substr(delimiter + 1);
    }
+
+   value_double = strtod(value.c_str(), endptr);
+   if (endptr != NULL)
+      throw std::runtime_error("Values in the database not in the correct format");
+
+   if (isValidDate(date) && isValidValue(value_double))
+      database[date] = value_double;
+   else
+   {
+      if (!isValidDate(date))
+         std::cerr << "Date is wrong: " << date << std::endl;
+
+      if (!isValidValue(value_double))
+         std::cerr << "Value is wrong: " << value << std::endl;
+
+      std::cerr << "Error in this line in database: " << line << std::endl;
+      throw std::runtime_error("Date or value in the database are not valid");
+   }
+}
+
+void BitcoinExchange::readInputLine(std::string &line)
+{
+   std::string date;
+   std::string value;
+   char **endptr = NULL;
+   int value_double;
+
+   size_t delimiter = line.find(',');
+   if (delimiter != std::string::npos)
+   {
+      date = line.substr(0, delimiter);
+      value = line.substr(delimiter + 1);
+   }
+
+   value_double = strtod(value.c_str(), endptr);
+   if (endptr != NULL)
+      throw std::runtime_error("Values in the database not in the correct format");
+
+   if (isValidDate(date) && isValidValue(value_double))
+      database[date] = value_double;
+   else
+   {
+      if (!isValidDate(date))
+         std::cerr << "Date is wrong: " << date << std::endl;
+
+      if (!isValidValue(value_double))
+         std::cerr << "Value is wrong: " << value << std::endl;
+
+      std::cerr << "Error in this line in database: " << line << std::endl;
+      throw std::runtime_error("Date or value in the database are not valid");
+   }
+}
+
+void BitcoinExchange::validateArgs(int argc, char *argv[]) const
+{
+   if (argc != 2)
+      throw std::runtime_error("No input file provided");
+   std::ifstream file(argv[1]);
+   if (!file.good())
+   {
+      file.close();
+      throw std::runtime_error("Error opening file");
+   }
+   file.close();
+}
+
+void BitcoinExchange::loadDatabase(std::string db_name)
+{
+   std::ifstream file(db_name);
+   if (!file.good())
+      throw std::runtime_error("Error opening database file");
+   std::string line;
+   while (std::getline(file, line, '\n'))
+   {
+      if (file.fail() && !file.eof())
+      {
+         file.close();
+         throw std::runtime_error("Error reading file");
+      }
+      if (line != DB_HEADER)
+         readDatabaseLine(line);
+   }
+}
+
+void BitcoinExchange::processInput(std::string &filename)
+{
+   std::ifstream file(filename);
+   if (!file.good())
+      throw std::runtime_error("Error opening input file");
+   std::string line;
+   std::getline(file, line, '\n');
+   while (std::getline(file, line, '\n'))
+   {
+      if (file.fail() && !file.eof())
+      {
+         file.close();
+         throw std::runtime_error("Error reading file");
+      }
+      readInputLine(line);
+   }
+}
+
+bool BitcoinExchange::isValidDate(const std::string &date) const
+{
+   std::string year;
+   std::string month_and_date;
+   size_t delimiter = date.find('-');
+   if (delimiter != std::string::npos)
+   {
+      year = date.substr(0, delimiter);
+      month_and_date = date.substr(delimiter + 1);
+      // std::cerr << "Year : " << year << " Month and date: " << month_and_date << std::endl;
+   }
+   unsigned int year_int = atoi(year.c_str());
+   // std::cerr << "Year_int : " << year_int << std::endl;
+
+   if (year_int < 0 || year_int > 9999)
+      return false;
+
+   std::string month;
+   std::string day;
+
+   delimiter = month_and_date.find('-');
+   if (delimiter != std::string::npos)
+   {
+      month = month_and_date.substr(0, delimiter);
+      day = month_and_date.substr(delimiter + 1);
+      // std::cerr << "Month : " << month << " Day: " << day << std::endl;
+   }
+   unsigned int month_int = atoi(month.c_str());
+   if (month_int < 1 || month_int > 12)
+      return false;
+   unsigned int day_int = atoi(day.c_str());
+   if (day_int < 1 || day_int > 31)
+      return false;
    return true;
 }
 
-bool ScalarConverter::isFloat(const std::string &input) 
+bool BitcoinExchange::isValidValue(const double &value_double) const
 {
-   if (input.empty())
-   {
-      return false;
-   }
-   
-   char last_char = input[input.size() - 1];
-   if (last_char != 'f' && last_char != 'F')
-   {
-      return false;
-   }
-   
-   std::string numPart = input.substr(0, input.size() - 1);
-   
-   if (!isDouble(numPart))
-   {
-      return false;
-   }
-   
-   errno = 0;
-   char *endptr = NULL;
-   double result = strtod(numPart.c_str(), &endptr);
-
-   if (result > FLT_MAX || result < -FLT_MAX)
-   {
-      return false;
-   }
-   
-   return true;  
-}
-
-bool ScalarConverter::isInt(const std::string &input)
-{
-   errno = 0;
-   char *endptr = NULL;
-   strtol(input.c_str(), &endptr, 10);
-   if (endptr == input.c_str() || *endptr != '\0' || errno == ERANGE)
-   {
-      return false;
-   }
-   return true;
-}
-
-bool ScalarConverter::isChar(const std::string &input)
-{
-   if (!input.empty() && (input.size() == 1) && !isdigit(input[0]) && isprint(input[0]))
-   {
+   if (value_double >= 0 || value_double < 21000000)
       return true;
-   }
-   return false;
-   
+   else
+      return false;
 }
 
-void ScalarConverter::specialCases(const std::string &input) {
-   std::cout << "Char: impossible" << std::endl;
-   if (input == "nan" || input == "nanf") {
-      std::cout << "Int: nan" << std::endl;
-      std::cout << "Float: nanf" << std::endl;
-      std::cout << "Double: nan" << std::endl;
-      return; 
-   }
-
-   if (input == "+inf" || input == "+inff" || input == "inf" || input == "inff") {
-      std::cout << "Int: inf" << std::endl;
-      std::cout << "Float: inff" << std::endl;  
-      std::cout << "Double: inf" << std::endl;
-      return;
-   }
-
-   if (input == "-inf" || input == "-inff") {
-      std::cout << "Int: -inf" << std::endl;
-      std::cout << "Float: -inff" << std::endl;
-      std::cout << "Double: -inf" << std::endl;
-      return;
-   }
-
-   if (input == "-nanf" || input == "-nan" || input == "+nanf" || input == "+nan") {
-      std::cout << "Int: impossible" << std::endl;
-      std::cout << "Float: impossible" << std::endl;
-      std::cout << "Double: impossible" << std::endl;
-      return;
-   }
-}
-
-void ScalarConverter::convert(const std::string &input)
+void BitcoinExchange::printDB(void) const
 {
-   // Empty string case
-   if (input.empty())
+   std::map<std::string, double>::const_iterator it;
+   for (it = database.begin(); it != database.end(); ++it)
    {
-      std::cout << "Char: impossible" << std::endl;
-      std::cout << "Int: impossible" << std::endl;
-      std::cout << "Float: impossible" << std::endl;
-      std::cout << "Double: impossible" << std::endl;
-      return;
-   }
-   // Special cases
-   if (input == "nan" || input == "nanf" || input == "+inf" || input == "+inff" 
-      || input == "inf" || input == "inff" ||input == "-inf" || input == "-inff"
-      || input == "-nan" || input == "-nanf" || input == "+nan" || input == "+nanf") 
-   {
-      specialCases(input);
-      return;
-   }
-
-   // Single character case
-   if (isChar(input))
-   {
-      char c = input[0];
-      if (isprint(c)) {
-         std::cout << "Char: \"" << static_cast<char>(c) << "\"" <<std::endl;
-      }
-      else {
-         std::cout << "Char: non-displayable" << std::endl; 
-      }
-      std::cout << "Int: " << static_cast<int>(c) << std::endl;
-      std::cout << "Float: " << static_cast<float>(c) << std::endl;
-      std::cout << "Double: " << static_cast<double>(c) << std::endl;
-      return;
-   }
-
-
-   double value;
-   // All numbers will be converted to doubles or floats
-
-   if (isFloat(input)) {
-      // Numeric part, without the trailing f/F
-      std::string numPart = input.substr(0, input.size() - 1);
-      value = strtod(numPart.c_str(), NULL);
-   } else if (isDouble(input) || isInt(input)) {
-      value = strtod(input.c_str(), NULL);
-   } else {
-      std::cout << "Char: impossible" << std::endl;
-      std::cout << "Int: impossible" << std::endl;
-      std::cout << "Float: impossible" << std::endl;
-      std::cout << "Double: impossible" << std::endl;
-      return;
-   }
-
-   if (value >= 0 && value <= 127 && isprint(static_cast<char>(value))) {
-      std::cout << "Char: \"" << static_cast<char>(value) << "\"" <<std::endl;
-   } else if (value >= 0 && value <= 127 && !isprint(static_cast<char>(value))) {
-      std::cout << "Char: non-displayable" << std::endl; 
-   } else {
-      std::cout << "Char: impossible" << std::endl; 
-   }
-
-   if (value <= INT_MAX && value >= INT_MIN) {
-      std::cout << "Int: " << static_cast<int>(value) << std::endl;
-   } else {
-      std::cout << "Int: impossible" << std::endl;
-   }
-
-   if (value <= FLT_MAX && value >= -FLT_MAX) { 
-      if (value == static_cast<int>(value)) {
-         std::cout << "Float: " << static_cast<float>(value) << ".0f" << std::endl;
-      } else {
-         std::cout << "Float: " << static_cast<float>(value) << "f" << std::endl;
-      }
-   } else {
-      std::cout << "Float: impossible" << std::endl;
-   }
-
-   if (value == static_cast<int>(value)) {
-      std::cout << "Double: " << value << ".0" << std::endl;
-   } else {
-      std::cout << "Double: " << value << std::endl;
+      std::cout << it->first << " => " << it->second << std::endl;
    }
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 17:37:29 by mrizhakov         #+#    #+#              #
-#    Updated: 2025/04/25 20:32:47 by mrizakov         ###   ########.fr        #
+#    Updated: 2025/04/29 17:48:50 by mrizhakov        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
-EXECUTABLE = BitcoinExchange
+EXECUTABLE = btc
 VPATH = $(SRC_DIR)
 SRC = BitcoinExchange.cpp main.cpp
 OBJ = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
