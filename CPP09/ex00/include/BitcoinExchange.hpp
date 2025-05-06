@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/05 19:20:19 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/05/06 20:37:35 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ public:
     BitcoinExchange &operator=(const BitcoinExchange &other);
 
     void validateArgs(int argc, char *argv[]) const;
-    void readDatabaseLine(std::string &line);
+    void readDatabaseLine(std::string &line, std::ifstream &file);
     void readInputLine(std::string &line);
 
     void loadDatabase(std::string db_name);
     bool isValidDate(const std::string &date) const;
-    bool isValidValue(const double &value) const;
+    void isValidValue(const double &value) const;
+    bool isValidPrice(const double &value) const;
+    double findValueByDate(const std::string& date) const;
+
+
     void printDB(void) const;
     void processInput(char *filename);
 
