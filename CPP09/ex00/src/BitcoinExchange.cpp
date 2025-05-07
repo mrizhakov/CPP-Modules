@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/06 21:00:32 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/05/06 23:56:06 by mrizhakov        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <iomanip>
-
 
 BitcoinExchange::BitcoinExchange(void) {}
 
@@ -86,17 +85,21 @@ void BitcoinExchange::readInputLine(std::string &line)
    double value_double;
 
    size_t delimiter = line.find('|');
-   try {
+   try
+   {
       if (delimiter != std::string::npos)
       {
          date = line.substr(0, delimiter);
          value = line.substr(delimiter + 1);
-         // value.erase(0, value.find_first_not_of(" \t"));
-         // value.erase(value.find_last_not_of(" \t") + 1);
+         // std::cout << "-----> Debug - Value string: |" << value << "|" << std::endl;
+
+         value.erase(0, value.find_first_not_of(" \t"));
+         value.erase(value.find_last_not_of(" \t") + 1);
          // date.erase(0, date.find_first_not_of(" \t"));
          // date.erase(date.find_last_not_of(" \t") + 1);
       }
-      else {
+      else
+      {
          throw std::runtime_error("Error: bad input => " + line);
       }
 
@@ -105,31 +108,37 @@ void BitcoinExchange::readInputLine(std::string &line)
          throw std::runtime_error("Values in the input form not in the correct format");
       isValidDate(date);
       isValidValue(value_double);
-      std::cout << "-----> Debug - Input value: " << std::fixed << std::setprecision(2) << value_double << std::endl;
+      // std::cout << "-----> Debug - Input value: " << value_double << std::endl;
+
+      // std::cout << "-----> Debug - Input value: " << std::fixed << std::setprecision(2) << value_double << std::endl;
       // std::cout << "Debug - Database value for " << date << ": " << db_value << std::endl;
 
       double converted_value = findValueByDate(date) * value_double;
-      std::cout << "---->converted_value " << std::fixed << std::setprecision(2) << converted_value << std::endl;
+      // std::cout << "---->findValueByDate(date) " << std::fixed << std::setprecision(2) << findValueByDate(date) << std::endl;
+
+      // std::cout << "---->converted_value " << std::fixed << std::setprecision(2) << converted_value << std::endl;
 
       std::cout << date << " => " << value_double << " = " << std::fixed << std::setprecision(2) << converted_value << std::endl;
       std::cout.unsetf(std::ios::fixed);
    }
-   catch (const std::exception& e) {
+   catch (const std::exception &e)
+   {
       std::cout << e.what() << std::endl;
    }
 }
 
-double BitcoinExchange::findValueByDate(const std::string& date) const
+double BitcoinExchange::findValueByDate(const std::string &date) const
 {
    std::map<std::string, double>::const_iterator it = database.find(date);
-   
+
    if (it != database.end())
    {
-      std::cout << "Found in DB " << std::fixed << std::setprecision(2) << it->second << std::endl;
+      // std::cout << "Found in DB " << std::fixed << std::setprecision(2) << it->second << std::endl;
       return it->second;
    }
-   
+
    it = database.lower_bound(date);
+   std::cout << "Found in DB  " << date << " price : " << std::fixed << std::setprecision(2) << it->second << std::endl;
 
    if (it == database.begin() && it->first > date)
    {
@@ -137,13 +146,13 @@ double BitcoinExchange::findValueByDate(const std::string& date) const
       throw std::runtime_error("Error: bad input => " + date);
       return false;
    }
-   
+
    if (it == database.end() || it->first > date)
    {
       --it;
    }
    // std::cout << it->second  << std::endl;
-   std::cout << "Found in DB " << std::fixed << std::setprecision(2) << it->second << std::endl;
+   // std::cout << "Found in DB " << std::fixed << std::setprecision(2) << it->second << std::endl;
 
    return it->second;
 }
