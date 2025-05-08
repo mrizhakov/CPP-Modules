@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/08 15:47:04 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:32:49 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void BitcoinExchange::readDatabaseLine(std::string &line, std::ifstream &file)
    }
 }
 
-void BitcoinExchange::readInputLine(std::string &line)
+void BitcoinExchange::readInputLine(std::string &line) const
 {
    std::string date;
    std::string value;
@@ -121,14 +121,12 @@ double BitcoinExchange::findValueByDate(const std::string &date) const
 
    if (it != database.end())
    {
-      return it->second;   std::cout << "Found in DB  " << date << " price : " << std::fixed << std::setprecision(2) << it->second << std::endl;
-
+      return it->second;   
    }
    it = database.lower_bound(date);
    if (it == database.begin() && it->first > date)
    {
       throw std::runtime_error("Error: bad input => " + date);
-      return false;
    }
 
    if (it == database.end() || it->first > date)
@@ -170,7 +168,7 @@ void BitcoinExchange::loadDatabase(std::string db_name)
    file.close();
 }
 
-void BitcoinExchange::processInput(char *filename)
+void BitcoinExchange::processInput(char *filename) const
 {
    std::ifstream file(filename);
    if (!file.good())
@@ -201,7 +199,7 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
    }
    unsigned int year_int = atoi(year.c_str());
    if (year_int < 0 || year_int > 9999)
-      return false;
+      throw std::runtime_error("Error: Date format incorrect => " + date);
 
    std::string month;
    std::string day;
@@ -214,10 +212,10 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
    }
    unsigned int month_int = atoi(month.c_str());
    if (month_int < 1 || month_int > 12)
-      return false;
+      throw std::runtime_error("Error: Date format incorrect => " + date);
    unsigned int day_int = atoi(day.c_str());
    if (day_int < 1 || day_int > 31)
-      return false;
+      throw std::runtime_error("Error: Date format incorrect => " + date);
    return true;
 }
 

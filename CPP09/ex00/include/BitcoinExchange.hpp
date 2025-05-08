@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:32 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/06 20:37:35 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:32:52 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,27 @@ class BitcoinExchange
 {
 private:
     std::map<std::string, double> database;
-
-public:
-    BitcoinExchange(void);
-    ~BitcoinExchange(void);
-    BitcoinExchange(const BitcoinExchange &other);
+    
     BitcoinExchange &operator=(const BitcoinExchange &other);
+    BitcoinExchange(const BitcoinExchange &other);
 
     void validateArgs(int argc, char *argv[]) const;
+    
     void readDatabaseLine(std::string &line, std::ifstream &file);
-    void readInputLine(std::string &line);
-
+    void readInputLine(std::string &line) const;
     void loadDatabase(std::string db_name);
+    
     bool isValidDate(const std::string &date) const;
     void isValidValue(const double &value) const;
     bool isValidPrice(const double &value) const;
     double findValueByDate(const std::string& date) const;
 
-
     void printDB(void) const;
-    void processInput(char *filename);
+    void processInput(char *filename) const;
+    
+public:
+    BitcoinExchange(void);
+    ~BitcoinExchange(void);
 
-    void run(int argc, char *argv[]);
+    void run(int argc, char *argv[]);    
 };

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrizhakov <mrizhakov@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:42 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/04/29 17:48:07 by mrizhakov        ###   ########.fr       */
+/*   Updated: 2025/05/08 16:18:06 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@
 
 int main(int argc, char *argv[])
 {
-    BitcoinExchange btc_exchange = BitcoinExchange();
+    BitcoinExchange btc_exchange;
 
     try
     {
         btc_exchange.run(argc, argv);
-
-        // btc_exchange.validateArgs(argc, argv, file);
     }
     catch (std::exception &e)
     {
-        // file.close();
         std::cerr << e.what() << std::endl;
     }
 
