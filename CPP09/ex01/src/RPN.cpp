@@ -35,7 +35,7 @@ RPN &RPN::operator=(const RPN &other)
 void RPN::runCalculator(int argc, char *argv[]) 
 {
    checkArgs(argc);
-   tokenizeInputLine(argv[1]);
+   pushAndCalculate(argv[1]);
    outputResult(stack);
    // printStack(stack);
 }
@@ -45,34 +45,23 @@ void RPN::checkArgs(int argc) const {
       throw std::runtime_error("Incorrect number of arguments");
 }
 
-void RPN::tokenizeInputLine(char *argv) {
+void RPN::pushAndCalculate(char *argv) {
    int left_var;
    int right_var;
    while (*argv != '\0')
    {
       if (isdigit(*argv))
-      {
          stack.push(*argv - '0');
-         // std::cerr << "Pushed a digit: " << *argv << std::endl;
-         // printStack(stack);
-      }
       else if (*argv == '-' || *argv == '+' ||*argv == '/' ||*argv == '*')
       {
-         // std::cerr << "Found an operand: " << *argv << std::endl;
          if (stack.empty())
             throw std::runtime_error("Incorrect input arguments, not enough numbers or too many operands");
-         if (!stack.empty())
+         else
          {
             right_var = stack.top();
-            // std::cerr << "Right_var is : " << right_var << std::endl;
-            stack.pop();         
-         }
-
-         if (!stack.empty())
-         {
+            stack.pop();  
             left_var = stack.top();
-            // std::cerr << "left_var is : " << left_var << std::endl;
-            stack.pop();         
+            stack.pop();          
          }
          if (*argv == '-')
             left_var -= right_var;
@@ -83,16 +72,11 @@ void RPN::tokenizeInputLine(char *argv) {
          if (*argv == '/')
             left_var /= right_var;
          stack.push(left_var);
-         // std::cerr << "Operation result is , pushed result back to stack: " << left_var << std::endl;
-         // printStack(stack);
-
       }
       else if (*argv == ' ') {
       }
       else
-      {
          throw std::runtime_error("Incorrect input arguments, please provide only digits or /*-+ operands");
-      }
       argv++;
    }
 }

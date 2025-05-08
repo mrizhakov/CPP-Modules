@@ -30,13 +30,11 @@ private:
     void readInputLine() const;
     void checkArgs(int argc) const;
     void outputResult(std::stack<int> stack) const;
-
+    void pushAndCalculate(char *argv);
+    void printStack(std::stack<int> stack);
 
 public:
     RPN(void);
     ~RPN(void);
     void runCalculator(int argc, char *argv[]);
-    void tokenizeInputLine(char *argv);
-    void printStack(std::stack<int> stack);
-
 };
