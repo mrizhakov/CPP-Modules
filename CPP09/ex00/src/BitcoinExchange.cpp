@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:36 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/06 21:00:32 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/05/08 15:34:27 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <iomanip>
+#include <locale.h>
 
 
 BitcoinExchange::BitcoinExchange(void) {}
@@ -35,9 +36,10 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 
 void BitcoinExchange::run(int argc, char *argv[])
 {
+   setlocale(LC_NUMERIC, "C");
    validateArgs(argc, argv);
    loadDatabase(DB_FILENAME);
-   printDB();
+   // printDB();
    processInput(argv[1]);
 }
 
@@ -45,8 +47,8 @@ void BitcoinExchange::readDatabaseLine(std::string &line, std::ifstream &file)
 {
    std::string date;
    std::string value;
-   char **endptr = NULL;
-   int value_double;
+   char *endptr = NULL;
+   double value_double;
 
    size_t delimiter = line.find(',');
    if (delimiter != std::string::npos)
@@ -55,8 +57,8 @@ void BitcoinExchange::readDatabaseLine(std::string &line, std::ifstream &file)
       value = line.substr(delimiter + 1);
    }
 
-   value_double = strtod(value.c_str(), endptr);
-   if (endptr != NULL)
+   value_double = strtod(value.c_str(), &endptr);
+   if (*endptr != '\0')
    {
       file.close();
       throw std::runtime_error("Values in the database not in the correct format");
@@ -91,10 +93,6 @@ void BitcoinExchange::readInputLine(std::string &line)
       {
          date = line.substr(0, delimiter);
          value = line.substr(delimiter + 1);
-         // value.erase(0, value.find_first_not_of(" \t"));
-         // value.erase(value.find_last_not_of(" \t") + 1);
-         // date.erase(0, date.find_first_not_of(" \t"));
-         // date.erase(date.find_last_not_of(" \t") + 1);
       }
       else {
          throw std::runtime_error("Error: bad input => " + line);
@@ -105,12 +103,7 @@ void BitcoinExchange::readInputLine(std::string &line)
          throw std::runtime_error("Values in the input form not in the correct format");
       isValidDate(date);
       isValidValue(value_double);
-      std::cout << "-----> Debug - Input value: " << std::fixed << std::setprecision(2) << value_double << std::endl;
-      // std::cout << "Debug - Database value for " << date << ": " << db_value << std::endl;
-
       double converted_value = findValueByDate(date) * value_double;
-      std::cout << "---->converted_value " << std::fixed << std::setprecision(2) << converted_value << std::endl;
-
       std::cout << date << " => " << value_double << " = " << std::fixed << std::setprecision(2) << converted_value << std::endl;
       std::cout.unsetf(std::ios::fixed);
    }
@@ -125,7 +118,6 @@ double BitcoinExchange::findValueByDate(const std::string& date) const
    
    if (it != database.end())
    {
-      std::cout << "Found in DB " << std::fixed << std::setprecision(2) << it->second << std::endl;
       return it->second;
    }
    
@@ -133,7 +125,6 @@ double BitcoinExchange::findValueByDate(const std::string& date) const
 
    if (it == database.begin() && it->first > date)
    {
-      // std::string error_msg = "Error: bad input => " + date;
       throw std::runtime_error("Error: bad input => " + date);
       return false;
    }
@@ -142,8 +133,6 @@ double BitcoinExchange::findValueByDate(const std::string& date) const
    {
       --it;
    }
-   // std::cout << it->second  << std::endl;
-   std::cout << "Found in DB " << std::fixed << std::setprecision(2) << it->second << std::endl;
 
    return it->second;
 }
@@ -196,6 +185,7 @@ void BitcoinExchange::processInput(char *filename)
       }
       readInputLine(line);
    }
+   file.close();
 }
 
 bool BitcoinExchange::isValidDate(const std::string &date) const
@@ -207,11 +197,8 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
    {
       year = date.substr(0, delimiter);
       month_and_date = date.substr(delimiter + 1);
-      // std::cerr << "Year : " << year << " Month and date: " << month_and_date << std::endl;
    }
    unsigned int year_int = atoi(year.c_str());
-   // std::cerr << "Year_int : " << year_int << std::endl;
-
    if (year_int < 0 || year_int > 9999)
       return false;
 
@@ -223,7 +210,6 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
    {
       month = month_and_date.substr(0, delimiter);
       day = month_and_date.substr(delimiter + 1);
-      // std::cerr << "Month : " << month << " Day: " << day << std::endl;
    }
    unsigned int month_int = atoi(month.c_str());
    if (month_int < 1 || month_int > 12)
