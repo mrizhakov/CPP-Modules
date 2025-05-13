@@ -14,6 +14,9 @@
 #include <stdexcept>
 #include <string>
 #include <sstream>
+#include <iostream>
+#include <cstdio>
+
 
 
 PmergeMe::PmergeMe(void) {}
@@ -37,7 +40,7 @@ void PmergeMe::runCalculator(int argc, char *argv[])
    checkArgs(argc, argv);
    // pushAndCalculate(argv[1]);
    // outputResult(stack);
-   // printStack(stack);
+   printDeque(pmerge_deque);
 }
 
 void PmergeMe::checkArgs(int argc, char *argv[]) {
@@ -46,13 +49,21 @@ void PmergeMe::checkArgs(int argc, char *argv[]) {
    for (int i = 1; i < argc; i++) {
    std::istringstream iss(argv[i]);
    int pmerge_int;
-   if (iss >> pmerge_int && pmerge_int > 0)
+   if (iss >> pmerge_int && iss.peek() == EOF && pmerge_int > 0)
    {
       pmerge_deque.push_back(pmerge_int);
    }
    else
       throw std::runtime_error("Please provide valid numeric positive arguments");
    }
+   // char leftover;
+   // if (iss >> pmerge_int && !(iss >> leftover) && pmerge_int > 0)
+   // {
+   //    pmerge_deque.push_back(pmerge_int);
+   // }
+   // else
+   //    throw std::runtime_error("Please provide valid numeric positive arguments");
+   // }
 }
 
 // void PmergeMe::pushAndCalculate(char *argv) {
@@ -91,16 +102,16 @@ void PmergeMe::checkArgs(int argc, char *argv[]) {
 //    }
 // }
 
-// void PmergeMe::printStack(std::stack<int> stack) {
-//    if (stack.empty())
-//       std::cout << "Stack is empty!" << std::endl;
-//    while (!stack.empty())
-//    {
-//       std::cout << stack.top() << " ";
-//       stack.pop();
-//    }
-//    std::cout << std::endl;
-// };
+void PmergeMe::printDeque(std::deque<unsigned int> pmerge_deque) {
+   if (pmerge_deque.empty())
+      std::cout << "pmerge_deque is empty!" << std::endl;
+   while (!pmerge_deque.empty())
+   {
+      std::cout << pmerge_deque.front() << " ";
+      pmerge_deque.pop_front();
+   }
+   std::cout << std::endl;
+};
 
 // void PmergeMe::outputResult(std::stack<int> stack) const {
 //    if (stack.size() == 1)

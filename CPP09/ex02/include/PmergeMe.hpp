@@ -33,7 +33,7 @@ private:
     // void readInputLine() const;
     // void outputResult(std::stack<int> stack) const;
     // void pushAndCalculate(char *argv);
-    // void printStack(std::stack<int> stack);
+    void printDeque(std::deque<unsigned int> pmerge_deque);
 
 public:
     PmergeMe(void);
