@@ -34,6 +34,9 @@ private:
     // void outputResult(std::stack<int> stack) const;
     // void pushAndCalculate(char *argv);
     void printDeque(std::deque<unsigned int> pmerge_deque);
+    std::vector<unsigned int> getJacobsthalIndices(unsigned int n);
+    void binaryInsert(std::deque<unsigned int>& chain, unsigned int value);
+
 
 public:
     PmergeMe(void);

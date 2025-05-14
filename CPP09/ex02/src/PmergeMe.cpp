@@ -16,6 +16,7 @@
 #include <sstream>
 #include <iostream>
 #include <cstdio>
+#include <algorithm>
 
 
 
@@ -38,9 +39,48 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 void PmergeMe::runCalculator(int argc, char *argv[]) 
 {
    checkArgs(argc, argv);
-   // pushAndCalculate(argv[1]);
-   // outputResult(stack);
+
+    // Step 1: Pair elements into smalls and larges
+   std::vector<unsigned int> smalls, larges;
+   int leftover = -1;
+   for (size_t i = 0; i + 1 < pmerge_deque.size(); i += 2) {
+      int a = pmerge_deque[i];
+      int b = pmerge_deque[i + 1];
+      if (a < b) {
+         smalls.push_back(a);
+         larges.push_back(b);
+      } else {
+         smalls.push_back(b);
+         larges.push_back(a);
+      }
+   }
+   if (pmerge_deque.size() % 2 != 0) {
+     leftover = pmerge_deque.back();
+   }
+
+   // Step 2: Sort larges to create the main chain
+   std::sort(larges.begin(), larges.end());
+   std::deque<unsigned int> main_chain(larges.begin(), larges.end());
+
+   // Step 3: Insert smalls based on Jacobsthal order
+   std::vector<unsigned int> insertion_order = getJacobsthalIndices(smalls.size());
+   for (size_t i = 0; i < insertion_order.size(); ++i) {
+      int index = insertion_order[i];
+      if (index < (int)smalls.size()) {
+         binaryInsert(main_chain, smalls[index]);
+      }
+   }
+
+    // Step 4: Insert leftover if exists
+   if (leftover != -1) {
+      binaryInsert(main_chain, leftover);
+   }
+
+
+
    printDeque(pmerge_deque);
+   printDeque(main_chain);
+
 }
 
 void PmergeMe::checkArgs(int argc, char *argv[]) {
@@ -119,3 +159,26 @@ void PmergeMe::printDeque(std::deque<unsigned int> pmerge_deque) {
 //    else 
 //       throw std::runtime_error("Incorrect input, try again");
 // };
+
+std::vector<unsigned int> PmergeMe::getJacobsthalIndices(unsigned int n) {
+    std::vector<unsigned int> indices;
+    unsigned int j0 = 0, j1 = 1;
+    while (j1 < n) {
+        if (std::find(indices.begin(), indices.end(), j1) == indices.end())
+            indices.push_back(j1);
+        int j2 = j1 + 2 * j0;
+        j0 = j1;
+        j1 = j2;
+    }
+    // Fill in remaining indices not covered
+    for (unsigned int i = 0; i < n; ++i) {
+        if (std::find(indices.begin(), indices.end(), i) == indices.end())
+            indices.push_back(i);
+    }
+    return indices;
+}
+
+void PmergeMe::binaryInsert(std::deque<unsigned int>& chain, unsigned int value) {
+    std::deque<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
+    chain.insert(pos, value);
+}
