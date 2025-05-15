@@ -70,7 +70,7 @@ void PmergeMe::checkArgs(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {
     std::istringstream iss(argv[i]);
     int pmerge_int;
-    if (iss >> pmerge_int && iss.peek() == EOF && pmerge_int > 0)
+    if (iss >> pmerge_int && iss.peek() == EOF && pmerge_int >= 0)
     {
         pmerge_deque.push_back(pmerge_int);
     }
@@ -165,7 +165,7 @@ std::vector<unsigned int> PmergeMe::mergeInsertSortRecursiveVector(const std::ve
     std::vector<unsigned int> main_chain = mergeInsertSortRecursiveVector(larges_deque);
     
     // Step 3: Insert smalls based on Jacobsthal order
-    std::vector<unsigned int> insertion_order = getJacobsthalIndices(smalls.size());
+    std::vector<unsigned int> insertion_order = getJacobsthalIndexes(smalls.size());
     for (size_t i = 0; i < insertion_order.size(); ++i) {
         int index = insertion_order[i];
         if (index < (int)smalls.size()) {
@@ -211,7 +211,7 @@ std::deque<unsigned int> PmergeMe::mergeInsertSortRecursiveDeque(const std::dequ
     std::deque<unsigned int> main_chain = mergeInsertSortRecursiveDeque(larges_deque);
     
     // Step 3: Insert smalls based on Jacobsthal order
-    std::vector<unsigned int> insertion_order = getJacobsthalIndices(smalls.size());
+    std::vector<unsigned int> insertion_order = getJacobsthalIndexes(smalls.size());
     for (size_t i = 0; i < insertion_order.size(); ++i) {
         int index = insertion_order[i];
         if (index < (int)smalls.size()) {
