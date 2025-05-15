@@ -39,63 +39,52 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 void PmergeMe::runMergeInsertSort(int argc, char *argv[]) 
 {
     checkArgs(argc, argv);
-
-   // Print the input
-   std::cout << "Before: ";
-   printDeque(pmerge_deque);
-   pmerge_vector.assign(pmerge_deque.begin(), pmerge_deque.end());
-   pmerge_vector.reserve(pmerge_vector.size());
+    std::cout << "Before: ";
+    printDeque(pmerge_deque);
+    pmerge_vector.assign(pmerge_deque.begin(), pmerge_deque.end());
+    pmerge_vector.reserve(pmerge_vector.size());
 
 
-    comparison_count_deque = 0;
+    clock_t c_start_deque = clock();
+    std::deque<unsigned int> sorted_result_deque = mergeInsertSortRecursiveDeque(pmerge_deque);
+    clock_t c_end_deque = clock();
+    double cpu_time_deque = double(c_end_deque - c_start_deque) / CLOCKS_PER_SEC * 1000000;
 
-   clock_t c_start_deque = clock();
-   std::deque<unsigned int> sorted_result_deque = mergeInsertSortRecursiveDeque(pmerge_deque);
-   clock_t c_end_deque = clock();
-   double cpu_time_deque = double(c_end_deque - c_start_deque) / CLOCKS_PER_SEC * 1000000;
-
-//    comparison_count_vector = 0;
-
-   clock_t c_start_vector = clock();
-   std::vector<unsigned int> sorted_result_vector = mergeInsertSortRecursiveVector(pmerge_vector);
-   clock_t c_end_vector = clock();
-   double cpu_time_vector = double(c_end_vector - c_start_vector) / CLOCKS_PER_SEC * 1000000;
-
-   // Print the result
-   std::cout << "After: ";
-   printDeque(sorted_result_deque);
-   printVector(sorted_result_vector);
-
-   std::cout << "Time to process a range of " << sorted_result_deque.size() << " elements with std::deque : " << cpu_time_deque << " us" << std::endl;
-   std::cout << "Time to process a range of " << sorted_result_vector.size() << " elements with std::vector : " << cpu_time_vector << " us" << std::endl;
-
-   std::cout << "Comparison count : " << comparison_count_deque << std::endl;
-//    std::cout << "Comparison count : " << comparison_count_vector << std::endl;
+    clock_t c_start_vector = clock();
+    std::vector<unsigned int> sorted_result_vector = mergeInsertSortRecursiveVector(pmerge_vector);
+    clock_t c_end_vector = clock();
+    double cpu_time_vector = double(c_end_vector - c_start_vector) / CLOCKS_PER_SEC * 1000000;
 
 
+    std::cout << "After: ";
+    printDeque(sorted_result_deque);
+    printVector(sorted_result_vector);
+
+    std::cout << "Time to process a range of " << sorted_result_deque.size() << " elements with std::deque : " << cpu_time_deque << " us" << std::endl;
+    std::cout << "Time to process a range of " << sorted_result_vector.size() << " elements with std::vector : " << cpu_time_vector << " us" << std::endl;
 }
 
 void PmergeMe::checkArgs(int argc, char *argv[]) {
-   if (argc == 1)
-      throw std::runtime_error("Please provide arguments to be sorted in the format ./PmergeMe 1 2 3 4");
-   for (int i = 1; i < argc; i++) {
-   std::istringstream iss(argv[i]);
-   int pmerge_int;
-   if (iss >> pmerge_int && iss.peek() == EOF && pmerge_int > 0)
-   {
-      pmerge_deque.push_back(pmerge_int);
-   }
-   else
-      throw std::runtime_error("Please provide valid numeric positive arguments");
-   }
-   // char leftover;
-   // if (iss >> pmerge_int && !(iss >> leftover) && pmerge_int > 0)
-   // {
-   //    pmerge_deque.push_back(pmerge_int);
-   // }
-   // else
-   //    throw std::runtime_error("Please provide valid numeric positive arguments");
-   // }
+    if (argc == 1)
+            throw std::runtime_error("Please provide arguments to be sorted in the format ./PmergeMe 1 2 3 4");
+    for (int i = 1; i < argc; i++) {
+    std::istringstream iss(argv[i]);
+    int pmerge_int;
+    if (iss >> pmerge_int && iss.peek() == EOF && pmerge_int > 0)
+    {
+        pmerge_deque.push_back(pmerge_int);
+    }
+    else
+        throw std::runtime_error("Please provide valid numeric positive arguments");
+    }
+    // char leftover;
+    // if (iss >> pmerge_int && !(iss >> leftover) && pmerge_int > 0)
+    // {
+    //    pmerge_deque.push_back(pmerge_int);
+    // }
+    // else
+    //    throw std::runtime_error("Please provide valid numeric positive arguments");
+    // }
 }
 
 void PmergeMe::printDeque(std::deque<unsigned int> pmerge_deque) {
@@ -121,45 +110,28 @@ void PmergeMe::printVector(std::vector<unsigned int> pmerge_deque) {
 };
 
 
-std::vector<unsigned int> PmergeMe::getJacobsthalIndices(unsigned int n) {
-    std::vector<unsigned int> indices;
+std::vector<unsigned int> PmergeMe::getJacobsthalIndexes(unsigned int n) {
+    std::vector<unsigned int> indexes;
     unsigned int j0 = 0;
     unsigned int j1 = 1;
     while (j1 < n) {
-        if (std::find(indices.begin(), indices.end(), j1) == indices.end())
-            indices.push_back(j1);
+        if (std::find(indexes.begin(), indexes.end(), j1) == indexes.end())
+            indexes.push_back(j1);
         int j2 = j1 + 2 * j0;
         j0 = j1;
         j1 = j2;
     }
     // Fill in remaining indices not covered
     for (unsigned int i = 0; i < n; ++i) {
-        if (std::find(indices.begin(), indices.end(), i) == indices.end())
-            indices.push_back(i);
+        if (std::find(indexes.begin(), indexes.end(), i) == indexes.end())
+            indexes.push_back(i);
     }
-    return indices;
+    return indexes;
 }
 
 void PmergeMe::binaryInsertDeque(std::deque<unsigned int>& chain, unsigned int value) {
-    
-    // lower_bound makes internal comparisons, so need to make it from scratch to keep track of them
-
-    // std::deque<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
-    // chain.insert(pos, value);
-
-    size_t left = 0;
-    size_t right = chain.size();
-    
-    while (left < right) {
-        size_t mid = left + (right - left) / 2;
-        comparison_count_deque++;  // Count comparison
-        if (chain[mid] < value)
-            left = mid + 1;
-        else
-            right = mid;
-    }
-    
-    chain.insert(chain.begin() + left, value);
+    std::deque<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
+    chain.insert(pos, value);
 }
 
 std::vector<unsigned int> PmergeMe::mergeInsertSortRecursiveVector(const std::vector<unsigned int>& input) {
@@ -176,11 +148,9 @@ std::vector<unsigned int> PmergeMe::mergeInsertSortRecursiveVector(const std::ve
         unsigned int a = input[i];
         unsigned int b = input[i + 1];
         if (a < b) {
-            comparison_count_deque++;
             smalls.push_back(a);
             larges.push_back(b);
         } else {
-            comparison_count_deque++;
             smalls.push_back(b);
             larges.push_back(a);
         }
@@ -224,11 +194,9 @@ std::deque<unsigned int> PmergeMe::mergeInsertSortRecursiveDeque(const std::dequ
         unsigned int a = input[i];
         unsigned int b = input[i + 1];
         if (a < b) {
-            comparison_count_deque++;
             smalls.push_back(a);
             larges.push_back(b);
         } else {
-            comparison_count_deque++;
             smalls.push_back(b);
             larges.push_back(a);
         }
@@ -259,23 +227,6 @@ std::deque<unsigned int> PmergeMe::mergeInsertSortRecursiveDeque(const std::dequ
 }
 
 void PmergeMe::binaryInsertVector(std::vector<unsigned int>& chain, unsigned int value) {
-    
-    // lower_bound makes internal comparisons, so need to make it from scratch to keep track of them
-
-    // std::vector<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
-    // chain.insert(pos, value);
-
-    size_t left = 0;
-    size_t right = chain.size();
-    
-    while (left < right) {
-        size_t mid = left + (right - left) / 2;
-        comparison_count_deque++;  // Count comparison
-        if (chain[mid] < value)
-            left = mid + 1;
-        else
-            right = mid;
-    }
-    
-    chain.insert(chain.begin() + left, value);
+    std::vector<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
+    chain.insert(pos, value);
 }
