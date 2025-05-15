@@ -6,7 +6,7 @@
 /*   By: mrizakov <mrizakov@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:08:42 by mrizakov          #+#    #+#             */
-/*   Updated: 2025/05/12 15:25:34 by mrizakov         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:50:03 by mrizakov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 int main(int argc, char *argv[])
 {
-    PmergeMe rpn;
+    PmergeMe mergeInsertSort;
 
     try
     {
-        rpn.runCalculator(argc, argv);
+         mergeInsertSort.runMergeInsertSort(argc, argv);
     }
     catch (std::exception &e)
     {

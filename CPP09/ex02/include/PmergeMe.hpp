@@ -21,11 +21,16 @@ class PmergeMe
 {
 private:
     std::deque<unsigned int> pmerge_deque;
+    std::vector<unsigned int> pmerge_vector;
+
+
 
     PmergeMe(const PmergeMe &other);
     PmergeMe &operator=(const PmergeMe &other);
 
     void checkArgs(int argc, char *argv[]);
+    void checkArgsVector(int argc, char *argv[]);
+
 
 
 
@@ -34,12 +39,22 @@ private:
     // void outputResult(std::stack<int> stack) const;
     // void pushAndCalculate(char *argv);
     void printDeque(std::deque<unsigned int> pmerge_deque);
+    void printVector(std::vector<unsigned int> pmerge_vector);
+
     std::vector<unsigned int> getJacobsthalIndices(unsigned int n);
-    void binaryInsert(std::deque<unsigned int>& chain, unsigned int value);
+    void binaryInsertDeque(std::deque<unsigned int>& chain, unsigned int value);
+
+    void binaryInsertVector(std::vector<unsigned int>& chain, unsigned int value);
+    std::deque<unsigned int> mergeInsertSortRecursiveDeque(const std::deque<unsigned int>& input);
+    std::vector<unsigned int> mergeInsertSortRecursiveVector(const std::vector<unsigned int>& input);
+
+
 
 
 public:
+    unsigned int comparison_count_deque;
+
     PmergeMe(void);
     ~PmergeMe(void);
-    void runCalculator(int argc, char *argv[]);
+    void runMergeInsertSort(int argc, char *argv[]);
 };

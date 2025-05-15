@@ -36,50 +36,42 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
    return *this;
 }
 
-void PmergeMe::runCalculator(int argc, char *argv[]) 
+void PmergeMe::runMergeInsertSort(int argc, char *argv[]) 
 {
-   checkArgs(argc, argv);
+    checkArgs(argc, argv);
 
-    // Step 1: Pair elements into smalls and larges
-   std::vector<unsigned int> smalls, larges;
-   int leftover = -1;
-   for (size_t i = 0; i + 1 < pmerge_deque.size(); i += 2) {
-      int a = pmerge_deque[i];
-      int b = pmerge_deque[i + 1];
-      if (a < b) {
-         smalls.push_back(a);
-         larges.push_back(b);
-      } else {
-         smalls.push_back(b);
-         larges.push_back(a);
-      }
-   }
-   if (pmerge_deque.size() % 2 != 0) {
-     leftover = pmerge_deque.back();
-   }
-
-   // Step 2: Sort larges to create the main chain
-   std::sort(larges.begin(), larges.end());
-   std::deque<unsigned int> main_chain(larges.begin(), larges.end());
-
-   // Step 3: Insert smalls based on Jacobsthal order
-   std::vector<unsigned int> insertion_order = getJacobsthalIndices(smalls.size());
-   for (size_t i = 0; i < insertion_order.size(); ++i) {
-      int index = insertion_order[i];
-      if (index < (int)smalls.size()) {
-         binaryInsert(main_chain, smalls[index]);
-      }
-   }
-
-    // Step 4: Insert leftover if exists
-   if (leftover != -1) {
-      binaryInsert(main_chain, leftover);
-   }
-
-
-
+   // Print the input
+   std::cout << "Before: ";
    printDeque(pmerge_deque);
-   printDeque(main_chain);
+   pmerge_vector.assign(pmerge_deque.begin(), pmerge_deque.end());
+   pmerge_vector.reserve(pmerge_vector.size());
+
+
+    comparison_count_deque = 0;
+
+   clock_t c_start_deque = clock();
+   std::deque<unsigned int> sorted_result_deque = mergeInsertSortRecursiveDeque(pmerge_deque);
+   clock_t c_end_deque = clock();
+   double cpu_time_deque = double(c_end_deque - c_start_deque) / CLOCKS_PER_SEC * 1000000;
+
+//    comparison_count_vector = 0;
+
+   clock_t c_start_vector = clock();
+   std::vector<unsigned int> sorted_result_vector = mergeInsertSortRecursiveVector(pmerge_vector);
+   clock_t c_end_vector = clock();
+   double cpu_time_vector = double(c_end_vector - c_start_vector) / CLOCKS_PER_SEC * 1000000;
+
+   // Print the result
+   std::cout << "After: ";
+   printDeque(sorted_result_deque);
+   printVector(sorted_result_vector);
+
+   std::cout << "Time to process a range of " << sorted_result_deque.size() << " elements with std::deque : " << cpu_time_deque << " us" << std::endl;
+   std::cout << "Time to process a range of " << sorted_result_vector.size() << " elements with std::vector : " << cpu_time_vector << " us" << std::endl;
+
+   std::cout << "Comparison count : " << comparison_count_deque << std::endl;
+//    std::cout << "Comparison count : " << comparison_count_vector << std::endl;
+
 
 }
 
@@ -106,42 +98,6 @@ void PmergeMe::checkArgs(int argc, char *argv[]) {
    // }
 }
 
-// void PmergeMe::pushAndCalculate(char *argv) {
-//    int left_var;
-//    int right_var;
-//    while (*argv != '\0')
-//    {
-//       if (isdigit(*argv))
-//          stack.push(*argv - '0');
-//       else if (*argv == '-' || *argv == '+' ||*argv == '/' ||*argv == '*')
-//       {
-//          if (stack.empty())
-//             throw std::runtime_error("Incorrect input arguments, not enough numbers or too many operands");
-//          else
-//          {
-//             right_var = stack.top();
-//             stack.pop();  
-//             left_var = stack.top();
-//             stack.pop();          
-//          }
-//          if (*argv == '-')
-//             left_var -= right_var;
-//          if (*argv == '+')
-//             left_var += right_var;
-//          if (*argv == '*')
-//             left_var *= right_var;
-//          if (*argv == '/')
-//             left_var /= right_var;
-//          stack.push(left_var);
-//       }
-//       else if (*argv == ' ') {
-//       }
-//       else
-//          throw std::runtime_error("Incorrect input arguments, please provide only digits or /*-+ operands");
-//       argv++;
-//    }
-// }
-
 void PmergeMe::printDeque(std::deque<unsigned int> pmerge_deque) {
    if (pmerge_deque.empty())
       std::cout << "pmerge_deque is empty!" << std::endl;
@@ -153,16 +109,22 @@ void PmergeMe::printDeque(std::deque<unsigned int> pmerge_deque) {
    std::cout << std::endl;
 };
 
-// void PmergeMe::outputResult(std::stack<int> stack) const {
-//    if (stack.size() == 1)
-//       std::cout << "Result: " << stack.top() << std::endl;
-//    else 
-//       throw std::runtime_error("Incorrect input, try again");
-// };
+void PmergeMe::printVector(std::vector<unsigned int> pmerge_deque) {
+   if (pmerge_deque.empty())
+      std::cout << "pmerge_deque is empty!" << std::endl;
+   while (!pmerge_deque.empty())
+   {
+      std::cout << pmerge_deque.front() << " ";
+      pmerge_deque.erase(pmerge_deque.begin());
+   }
+   std::cout << std::endl;
+};
+
 
 std::vector<unsigned int> PmergeMe::getJacobsthalIndices(unsigned int n) {
     std::vector<unsigned int> indices;
-    unsigned int j0 = 0, j1 = 1;
+    unsigned int j0 = 0;
+    unsigned int j1 = 1;
     while (j1 < n) {
         if (std::find(indices.begin(), indices.end(), j1) == indices.end())
             indices.push_back(j1);
@@ -178,7 +140,142 @@ std::vector<unsigned int> PmergeMe::getJacobsthalIndices(unsigned int n) {
     return indices;
 }
 
-void PmergeMe::binaryInsert(std::deque<unsigned int>& chain, unsigned int value) {
-    std::deque<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
-    chain.insert(pos, value);
+void PmergeMe::binaryInsertDeque(std::deque<unsigned int>& chain, unsigned int value) {
+    
+    // lower_bound makes internal comparisons, so need to make it from scratch to keep track of them
+
+    // std::deque<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
+    // chain.insert(pos, value);
+
+    size_t left = 0;
+    size_t right = chain.size();
+    
+    while (left < right) {
+        size_t mid = left + (right - left) / 2;
+        comparison_count_deque++;  // Count comparison
+        if (chain[mid] < value)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    
+    chain.insert(chain.begin() + left, value);
+}
+
+std::vector<unsigned int> PmergeMe::mergeInsertSortRecursiveVector(const std::vector<unsigned int>& input) {
+    // Base case: 0 or 1 elements are already sorted
+    if (input.size() <= 1)
+        return input;
+    
+    // Step 1: Pair elements into smalls and larges
+    std::vector<unsigned int> smalls;
+    std::vector<unsigned int> larges;
+    int leftover = -1;
+    
+    for (size_t i = 0; i + 1 < input.size(); i += 2) {
+        unsigned int a = input[i];
+        unsigned int b = input[i + 1];
+        if (a < b) {
+            comparison_count_deque++;
+            smalls.push_back(a);
+            larges.push_back(b);
+        } else {
+            comparison_count_deque++;
+            smalls.push_back(b);
+            larges.push_back(a);
+        }
+    }
+    
+    if (input.size() % 2 != 0) {
+        leftover = input.back();
+    }
+    
+    // Step 2: Create a deque from larges and recursively sort it
+    std::vector<unsigned int> larges_deque(larges.begin(), larges.end());
+    std::vector<unsigned int> main_chain = mergeInsertSortRecursiveVector(larges_deque);
+    
+    // Step 3: Insert smalls based on Jacobsthal order
+    std::vector<unsigned int> insertion_order = getJacobsthalIndices(smalls.size());
+    for (size_t i = 0; i < insertion_order.size(); ++i) {
+        int index = insertion_order[i];
+        if (index < (int)smalls.size()) {
+            binaryInsertVector(main_chain, smalls[index]);
+        }
+    }
+    // Step 4: Insert leftover if exists
+    if (leftover != -1) {
+        binaryInsertVector(main_chain, leftover);
+    }
+    
+    return main_chain;
+}
+
+std::deque<unsigned int> PmergeMe::mergeInsertSortRecursiveDeque(const std::deque<unsigned int>& input) {
+    // Base case: 0 or 1 elements are already sorted
+    if (input.size() <= 1)
+        return input;
+    
+    // Step 1: Pair elements into smalls and larges
+    std::deque<unsigned int> smalls;
+    std::deque<unsigned int> larges;
+    int leftover = -1;
+    
+    for (size_t i = 0; i + 1 < input.size(); i += 2) {
+        unsigned int a = input[i];
+        unsigned int b = input[i + 1];
+        if (a < b) {
+            comparison_count_deque++;
+            smalls.push_back(a);
+            larges.push_back(b);
+        } else {
+            comparison_count_deque++;
+            smalls.push_back(b);
+            larges.push_back(a);
+        }
+    }
+    
+    if (input.size() % 2 != 0) {
+        leftover = input.back();
+    }
+    
+    // Step 2: Create a deque from larges and recursively sort it
+    std::deque<unsigned int> larges_deque(larges.begin(), larges.end());
+    std::deque<unsigned int> main_chain = mergeInsertSortRecursiveDeque(larges_deque);
+    
+    // Step 3: Insert smalls based on Jacobsthal order
+    std::vector<unsigned int> insertion_order = getJacobsthalIndices(smalls.size());
+    for (size_t i = 0; i < insertion_order.size(); ++i) {
+        int index = insertion_order[i];
+        if (index < (int)smalls.size()) {
+            binaryInsertDeque(main_chain, smalls[index]);
+        }
+    }
+    // Step 4: Insert leftover if exists
+    if (leftover != -1) {
+        binaryInsertDeque(main_chain, leftover);
+    }
+    
+    return main_chain;
+}
+
+void PmergeMe::binaryInsertVector(std::vector<unsigned int>& chain, unsigned int value) {
+    
+    // lower_bound makes internal comparisons, so need to make it from scratch to keep track of them
+
+    // std::vector<unsigned int>::iterator pos = std::lower_bound(chain.begin(), chain.end(), value);
+    // chain.insert(pos, value);
+
+    size_t left = 0;
+    size_t right = chain.size();
+    
+    while (left < right) {
+        size_t mid = left + (right - left) / 2;
+        comparison_count_deque++;  // Count comparison
+        if (chain[mid] < value)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+    
+    chain.insert(chain.begin() + left, value);
 }
