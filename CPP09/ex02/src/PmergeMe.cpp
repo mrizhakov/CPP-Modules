@@ -56,8 +56,9 @@ void PmergeMe::runMergeInsertSort(int argc, char *argv[])
     double cpu_time_vector = double(c_end_vector - c_start_vector) / CLOCKS_PER_SEC * 1000000;
 
 
-    std::cout << "After: ";
+    std::cout << "After deque: ";
     printDeque(sorted_result_deque);
+    std::cout << "After vector: ";
     printVector(sorted_result_vector);
 
     std::cout << "Time to process a range of " << sorted_result_deque.size() << " elements with std::deque : " << cpu_time_deque << " us" << std::endl;
