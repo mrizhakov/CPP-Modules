@@ -13,13 +13,6 @@
 #pragma once
 #include <stack>
 
-enum Operands {
-    ADD,
-    SUBSTR,
-    MULT,
-    DIV
-};
-
 class RPN
 {
 private:

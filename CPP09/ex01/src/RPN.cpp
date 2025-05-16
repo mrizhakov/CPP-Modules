@@ -52,7 +52,7 @@ void RPN::pushAndCalculate(char *argv) {
    {
       if (isdigit(*argv))
          stack.push(*argv - '0');
-      else if (*argv == '-' || *argv == '+' ||*argv == '/' ||*argv == '*')
+      else if ((*argv == '-' || *argv == '+' ||*argv == '/' ||*argv == '*') && stack.size() >= 2)
       {
          if (stack.empty())
             throw std::runtime_error("Incorrect input arguments, not enough numbers or too many operands");
